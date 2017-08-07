@@ -1,0 +1,7 @@
+{
+    "module" : {
+        "event" : {
+           "enabled" : true
+        }
+    }
+}

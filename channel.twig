@@ -1,0 +1,119 @@
+{% set networkData = _Network.getNetworkData() %}
+
+{% set blogInfo = _Blog.getBlog() %}
+{{ set(this, 'title', blogInfo.title) }}
+
+
+{{this.registerJs("CardController();")}}
+
+{% set limit = 10 %}
+
+{% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
+{% set articles = articlesArr.articles %}
+
+{% set blogImage = "" %}
+{% if blogInfo.media['cover']['path'] is not empty %}
+    {% set blogImage = blogInfo.media['cover']['path'] %}
+{% endif %}    
+
+
+{% set sectionMap = blogInfo.blogHeaderMenu %}
+
+<!-- used to index each article as we loop over throughout the template -->
+{% set articleCount = 0 %}
+
+
+
+{% set seminars = [] %}
+{% for key, value in sectionMap %}
+    {% if value.blogTitle | lower == this.title | lower %}
+        {% set seminars = value['children'] %}
+    {% endif %}
+{% endfor %}
+
+
+
+    
+        <section class="home-page-content">
+
+
+            <div class="header-image" style="background-image: url('{{blogImage}}')"></div>
+
+
+            <div class="container section">
+
+                <div class="row">
+                    <div class="col-sm-12 breadcrumb">
+                        Research to Practice > Overview
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="col-sm-12 col-md-7 main-content">
+
+                        <h1>{{blogInfo.title}}</h1>
+
+                        <div class="description">
+                            {{blogInfo.shortDescription | raw}}
+                        </div>
+
+
+
+
+                        {% if seminars[articleCount] %}                                                                
+                        
+                            <ul class="section-list">
+                                {% for i in 0..10 %}
+                                    {% if seminars[articleCount] %} 
+                                        <li>
+                                            <a href="{{seminars[articleCount].link}}"> 
+                                                <p>July 17</p>
+                                                <h2>{{seminars[articleCount].blogTitle}}</h2>
+                                                <span class="link-arrow"></span>
+                                            </a>
+                                        </li>                                                        
+                                        {% set articleCount = articleCount + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div><!-- .col-sm-7-->
+
+
+
+
+
+                    <div class="col-sm-12 col-md-5 sidebar">
+                        <h2>Upcoming Events</h2>
+                        <p>Coming in early 2017</p>
+
+                        <div class="upcoming">
+                            <div class="sidebar-date">
+                                <p class="date-day">25</p>
+                                <p class="date-month">July</p>
+                            </div>
+
+                            <div class="sidebar-text">
+
+                                <h3>Child neglect</h3>
+                                <p>
+                                    This seminar will explore the somewhat intangible and 
+                                    grey areas of child neglect. Key approaches will be put 
+                                    forward with direct links to practice with families who 
+                                    face chronic neglect, and how this interplays with disadvantage. 
+                                </p>
+                            </div>
+                        </div>
+ 
+                    </div>
+                </div>
+
+
+            </div><!-- .container-->
+        </section><!-- .home-page-content-->
+
+
+

@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-sm-12 breadcrumb">
+    	<a href="{{networkData.defaultBlogUrl}}">Home </a>> 
+    	{% for key, value in crumb if key < crumb | length -1 %}
+        	<a href="{{value.link}}">{{value.title}} </a>>
+        {% endfor %}
+        <span>{{crumb | slice(crumb|length -1, 1)[0]['title']}}</span>
+    </div>
+</div>

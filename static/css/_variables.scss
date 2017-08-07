@@ -1,0 +1,101 @@
+//Fonts
+$font-family-sans-serif:    "Poppins", Helvetica, Arial, sans-serif;
+$font-family-serif:    		"PT Serif", "Times New Roman", Times, serif;
+$base-font-family: 			"Poppins", Helvetica, Arial, sans-serif !default;
+// $headings-font-family:      "adelle-sans", Helvetica, Arial, sans-serif;
+
+
+$font-size-base:            16px;
+$font-unit:                 0em; 
+$browser-context:           $font-size-base;
+$baseFontSize:				16px; /* ($baseFontSize * 1) + 0px; */
+
+
+// //colors
+$brand-primary:             #000; 
+$brand-secondary:           #e22f22;
+
+$dark-color:       			#212427;
+$white:						#ffffff;
+$black:             		#000000;
+$blue:              		#46a5fc;
+
+$transparent:				rgba(0,0,0,0);
+$gray-2-color:     			#efefef;
+$gray-3-color:     			#dfe0e1;
+$gray-4-color:     			#bfc3c3;
+$grey:						#808080;
+$border-color:     			#e0e0e0;
+$base-color:       			#4B4B4B;
+$header-color:     			#4B4B4B;
+$error-color:      			#e73d4a;
+$success-color:    			#17aa1c;
+$warning:           		#fecd50;
+$selected-color:   			#212427;
+$hover-color:      			#303030;
+$visited-color:    			#121212;
+$link-color:       			#212427;
+$link-hover-color: 			#303030;
+
+
+
+//Buttons
+$btn-primary-color:              #fff !default;
+$btn-primary-bg:                 $brand-primary !default;
+$btn-primary-border:             darken($btn-primary-bg, 5%) !default;
+
+
+$colors: (
+	facebook:    		#3d5c95,
+	twitter:     		#2eb1eb,
+	google-plus: 		#f37b65,
+	instagram:   		#9f1e97,
+	linkedin:    		#0077b5,
+	youtube:     		#e34336,
+    vimeo:       		#00b3ec,
+						
+    lightgrey: 			rgba(74,74,74,.3),
+    mediumgrey: 		rgba(74,74,74,.7),
+
+	darkgrey: 			#4A4A4A,
+	red:				#F03746,
+	grey:          		#B9B9B9,
+	offwhite:  	  		#F1F1F1,
+);
+
+
+
+//Responsive break points
+
+
+$header-break:              992px;
+$large-break:				1450px;
+$md-break:                  1200px; /* col-lg  */
+$mmd-break:                 992px;  /* col-md ipad landscape */
+$mmd-break-down:            991px;  /* col-md ipad landscape */
+$sm-break:                  768px;  /* col-sm ipad */
+$sm-break-down:             767px;  /* col-sm ipad */
+$mobile-break:              620px;	/* col-xs */
+$sm-mobile-break:           490px;	/* col-xs */
+
+//Navbar
+$logo-width:                52px;
+$logo-height:               52px;
+$sticked-logo-height:       34px;
+$sticked-logo-width:        34px;
+$navbar-height:             70px;
+
+$center:					center;
+
+
+$media-desktop: "screen and (max-width: 1194px)";
+$media-ipadLandscape: "screen and (min-width : 992px) and (max-width : 1024px)";
+$media-smallDevices: "screen and (min-width : 1025px) and (max-width : 1150px)";
+$media-ipadPortrait: "screen and (max-width :992px)";
+$media-phone: "screen and (min-width : 200px) and (max-width : 480px)";
+$media-iPhoneMedium: "screen and (min-width : 481px) and (max-width : 667px)";
+$media-iPhoneLarge: "screen and (min-width : 668px) and (max-width : 767px)";
+$media-iPad: "screen and (min-width : 768px) and (max-width : 992px)";
+
+// Standard transition speed
+$transition: 0.4s;

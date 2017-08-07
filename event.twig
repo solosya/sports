@@ -1,0 +1,58 @@
+{{ set(this, 'title', event.title) }}
+{{this.registerLinkTag({rel:'amphtml', href:_AppHelper.getServerUrl(false)~'?amp=1'})}}
+
+{% set network = _Network.getNetworkData() %}
+{% set img = false %}
+{% if event.media | length > 0 %}
+    {% set img = event.media[0] %}
+{% endif %}
+
+<section class="">
+
+
+    {{this.render('partials/section-header.twig', {
+        blogInfo: event, 
+        blogImage:img['path'],
+        networkData: networkData,
+        crumb: [parentPage, currentPage],
+    }) | raw}}
+
+
+    <div class="container event">
+
+        <div class="row main-content">
+            <div class="col-sm-12 col-md-7 event-content">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="content">
+                            {{event.content | raw}}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-12 col-md-5 sidebar">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="content">
+                            <p>sidebar text</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</section><!-- .home-page-content-->

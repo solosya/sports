@@ -1,0 +1,90 @@
+.most-popular{
+    > h2 {
+        font-size: rem(30);
+        font-family: $font-family-sans-serif;
+        color: #e22f22;
+    }
+
+    article{
+        margin-bottom: 80px;
+        @media screen and (max-width: $sm-break){
+            margin-bottom: 30px;
+        }
+        &:after{
+            content: '';
+            height: 3px;
+            width: 41px;
+            background-color: #dadada;
+            display: block;
+            @media screen and (max-width: $sm-break){
+                display: none;
+            }
+        }
+
+        > figure{
+            margin-bottom: 24px;
+        }
+
+        > .content{
+            > .category{
+                display:inline;
+                font-size: rem(14);
+                color: #8a8b93;
+                font-weight: bold;
+                text-transform: uppercase;
+                line-height: 1.42857;
+                @media screen and (max-width: $sm-break){
+                    font-size: rem(11.2);
+                }
+            }
+            > time{
+                padding:0;
+                border:none;
+                float: right;
+                font-size: rem(12);
+                color: #8a8b93;
+                line-height: 1.82857;
+                @media screen and (max-width: $sm-break){
+                    display: none;
+                }
+            }
+
+            > h2{
+                font-size: rem(20);
+                font-weight: normal;
+                margin-bottom: 24px;
+                margin-top: 21px;
+
+                @media screen and (max-width: $sm-break){
+                    margin-bottom: 17px;
+                    font-size: rem(16);
+                    margin-top: 5px;
+                }
+                &:after{
+                    @media screen and (max-width: $sm-break){
+                        content: '';
+                        height: 3px;
+                        width: 41px;
+                        background-color: #dadada;
+                        display: block;
+                        margin-top: 7px;
+                    }
+                }
+            }
+
+            > .author{
+                font-size: 14px;
+                font-weight: normal;
+                color: #6c6c6c;
+
+                p {
+                    font-family:inherit;
+                    font-weight:inherit;
+                    font-size:inherit;
+                    padding:0;
+                    float:none;
+                }
+            }
+        }
+    }
+}

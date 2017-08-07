@@ -1,0 +1,24 @@
+.event{
+	.event-content {
+		
+		&:before {
+		    content: "";
+		    position: absolute;
+		    top: 0;
+		    bottom: 80px;
+		    right: -53px;
+		    width: 1px;
+		    background: color(lightblue);
+		    @media screen and (max-width: 991px) {
+		       display: none;
+
+		    }
+		}
+	}
+
+	.sidebar {
+		padding-left:115px;
+	}
+
+}
+

@@ -1,0 +1,72 @@
+{% set logo = networkData.templatePath~'/static/images/logo.svg'%}
+{% if networkData.logoMedia | length > 0 %}
+    {% set logo = _Media.getMediaUrl(networkData.logoMedia, 290, 80, {'crop': 'fit'} )%}
+{% endif %}
+
+
+
+
+
+
+<footer class="site-footer">
+    <div class="container">        
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+                <a class="footer-brand" 
+                    href="{{networkData.defaultBlogUrl}}" 
+                    style="background-image:url({{logo}})"
+                    rel="Home" 
+                    tabindex="-1" 
+                    title="Home">
+                </a>
+            </div>
+
+            <div class="col-sm-12 col-md-9">
+
+                <ul id="menu-primary-menu" class="menu">
+                    {% set menuItems = blog.blogHeaderMenu %}
+                    {% for parentItem in menuItems  %}
+
+                       {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : ''%}
+                       {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}
+
+                       <li>
+                            <a href="{{parentItem.link |raw}}" class="{{activeClass}} {{externalClass}}" {% if parentItem.target != "" %}target="{{parentItem.target}}"{% endif %}>
+                                {% if parentItem.label != "" %}
+                                    {{parentItem.label}}
+                                {% elseif parentItem.blogTitle != "" %}
+                                    {{parentItem.blogTitle}}
+                                {% elseif parentItem.pageTitle != "" %}
+                                    {{parentItem.pageTitle}}
+                                {% endif %}
+                                {% if parentItem.children is defined and parentItem.children | length > 0 %}
+                                    <span class="down-arrow"></span>
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                    </li>
+                </ul>
+            </div>
+
+
+{#             <div class="col-sm-12 col-md-9">
+                <ul class="footer-links">
+                	<li><a href="#">Contacts</a></li
+                	><li><a href="#">Accessability</a></li
+            		><li><a href="#">Site Index</a></li
+        			><li><a href="#">Privacy</a></li
+    				><li><a href="#">Copyright</a></li
+					><li><a href="#">Feedback</a></li
+					><li class="copyright">Copyright © 2017</li>
+				</ul>
+            </div>
+ #}
+
+        </div><!--row-->
+
+    </div><!-- .container-->
+
+    
+</footer>

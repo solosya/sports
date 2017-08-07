@@ -1,0 +1,91 @@
+{% import "partials/quotes.twig" as quotes %}
+
+{% set blogInfo = _Blog.getBlog() %}
+
+
+{{ set(this, 'title', article.title) }}
+{% set networkData = _Network.getNetworkData() %}
+
+
+{% set currentPage = {
+    "title": this.title,
+    "link": article.url
+} %}
+
+
+{% set parentUrl = article.blog.url | split('@')[1] | replace({'-videos': '', '-notes': ''}) %}
+{% set parentBlog = {
+    "title": "",
+    "link": ""
+} %}
+
+{% set parentPage = {
+    "title": "",
+    "link": ""
+} %}
+
+{% set sectionMap = blogInfo.blogHeaderMenu %}
+
+{% set publishedDate = _AppHelper.getDateTimeBasedOnTimezone(article.publishedDate, 'F Y') %}
+
+{% for key, value in sectionMap  %}
+
+
+    {% if value['children'] | length > 0 %}
+        {% for key, childvalue in value['children']  %}
+
+            {% if childvalue.link | split('@')[1] == parentUrl %}
+                {% set parentBlog = parentBlog|merge({('title'): childvalue.blogTitle}) %}
+                {% set parentBlog = parentBlog|merge({('link'): childvalue.link}) %}
+            {% endif %}
+
+
+            {% if childvalue.blogTitle | lower == parentBlog.title | lower %}
+                {% set parentPage = parentPage|merge({('title'): value.blogTitle}) %}
+                {% set parentPage = parentPage|merge({('link'): value.link}) %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+
+<main id="main" class="" role="main">
+
+
+    <div class="container" >
+            {{this.render('partials/breadcrumb.twig', {
+                blogInfo: blogInfo, 
+                blogImage:blogImage,
+                networkData: networkData,
+                crumb: [parentPage, parentBlog, currentPage],
+
+            }) | raw}}
+    </div>
+
+    <article class="article-main">
+
+        <div class="container">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="content-wrapper">
+                            <div class="content-block-top">
+
+                                <h1>{{ quotes.smarten(article.title) }}</h1>
+                                <h2>{{parentBlog.title}} - <time datetime="{{publishedDate}}">{{publishedDate}}</time></h2> 
+
+                            </div><!--content-block-top-->
+
+                            <div class="article_content">
+                                <p>{{ article.content | _resizeImages({'width': 500}) | raw }}</p>
+                            </div><!-- .content-->
+                        </div><!-- .content-->
+
+                    </div><!-- .col-md-8-->
+                </div>
+            </div><!-- .page-content-->
+
+        </div><!--container-->
+    </article>
+</main><!--site-main-->
+

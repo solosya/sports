@@ -1,0 +1,78 @@
+.card-sm{
+    @media screen and (min-width: $md-break){
+        @include card-image-top(auto, 160px);
+
+        position:relative;
+
+
+        a.card {
+            > article {
+                position:relative;
+
+                > figure{
+                    overflow: hidden;
+                    margin-bottom:6px;
+
+                    &.video {
+                        &:before{
+                           @include videoIcon();
+                        }
+                    }
+                }
+
+
+                > .content{
+
+                    position:relative;
+                    padding: 0;
+
+                    > .category{
+                    }
+
+                    > h2{
+                        font-weight: normal;
+                        font-size: rem(17);
+                        line-height:1.29;
+                        margin-top:5px;
+                        margin-bottom:10px;
+                        max-height:45px;
+                    }
+
+                    > p {
+                        display:none;
+                    }
+
+
+                    > .author{
+
+                        >p {
+                        }
+                    }
+
+
+                }
+            }
+
+
+            &.article.without__image {
+                .content {
+                    padding-top:87px;
+                    height:100%;
+
+                    h2 {
+                        font-size: rem(17);
+                        font-weight:bold;
+                        max-height:52px;
+                    }
+
+                    > p {
+                        font-size: rem(13);
+                        display: block;
+                        max-height:100px;
+                        margin-bottom: 18px;
+                    }
+                }
+            }   
+        }
+    }
+}

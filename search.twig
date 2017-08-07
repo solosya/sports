@@ -1,0 +1,67 @@
+{{ set(this, 'title', 'Search - ' ~ search) }}
+
+{{this.registerJs("CardController();")}}
+
+{% set limit = 20 %}
+{% set articles = _Search.searchArticles({'limit': limit, 'offset': 0, 'search': search}) %}
+{% set networkData = _Network.getNetworkData() %}
+
+
+
+
+<!-- used to index each article as we loop over throughout the template -->
+{% set articleCount = 0 %}
+
+
+    <main id="main" class="site-main searchPage" role="main">
+    
+
+
+        <section class="card-group">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>{{this.title}}</h1>
+                    </div>
+                </div>
+
+
+
+                
+                <div class="row">
+                    {% for article in articles %}                                                                
+                        {{this.render('partials/_single-article.twig', {
+                            article: article, 
+                            position: (articleCount+1), 
+                            imageSize: {width: 360, height: 215},
+                            containerClass: 'col-sm-12 card-search card-search-mob'}) | raw}}
+                        {% set articleCount = articleCount + 1 %}
+                    {% endfor %}
+                </div><!-- .row-->
+
+
+
+                {{ this.render('partials/ajaxarticles.twig', {
+                    limit: limit, 
+                    non_pinned: articlesArr.existingNonPinnedCount, 
+                    articles: articles,
+                    card_style: "col-sm-12 card-search card-search-mob",
+                    container:"mainAjaxArticles",
+                    loadtype: "search"
+                }) | raw }}
+
+
+
+
+
+            </div><!-- .container-->
+
+
+
+
+        </section><!-- .top-stories-->
+
+
+    </main><!-- .site-main -->
+

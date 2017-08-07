@@ -1,0 +1,162 @@
+{% set blogInfo = _Blog.getBlog() %}
+{% set networkData = _Network.getNetworkData() %}
+
+{{ set(this, 'title', blogInfo.title) }}
+
+{% set limit = 20 %}
+{% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
+{% set articles = articlesArr.articles %}
+
+{% set profileImg = false %}
+{% if blogInfo.owner['media'] is defined and blogInfo.owner['media'] | length > 0 %}
+    {% set profileImg = _Media.getMediaUrl(blogInfo.owner['media'], 100, 100, {radius:'max', crop: 'thumb', gravity: 'face'}) %}
+{% endif %}
+
+{% set hasBlogImage = FALSE %}
+{% set blogImage = "" %}
+{% if blogInfo.media['cover']['path'] is not empty %}
+    {% set blogImage = blogInfo.media['cover']['path'] %}
+    {% set hasBlogImage = TRUE %}
+{% endif %}    
+
+<!-- used to index each article as we loop over throughout the template -->
+{% set articleCount = 0 %}
+
+
+
+
+{{this.registerJs("HomeController.listing();")}}
+{{this.registerJs("HomeController.blog();")}}
+
+
+    <section class="blog-hero content-block">
+        <div class="container">
+            <div class="hero-image-wrapper" style="background-image: url({{ blogInfo['media']['cover']['path'] }});">
+                <div class="content">
+                    <h1>{{ blogInfo.title }}</h1>
+                    <p>{{ blogInfo.shortDescription }}</p>
+                </div><!--content-->
+                <div class="author-info">
+                    
+                    {% if profileImg %}
+                        <img src="{{ profileImg }}" alt="Author name">
+                    {% endif %}
+
+                    <span class="name">{{ blogInfo.owner.display_name }}</span>
+                    {% if not _User.isGuest %}
+                    {% set isUserFollowingBlog = _User.isUserFollowing('user', blogInfo.owner.id) %}
+                        {% if isUserFollowingBlog %}
+                            <a href="#" class="btn followUser"  data-guid="{{blogInfo.owner.guid}}" data-status="unfollow">FOLLOWING -</a>
+                        {% else %}
+                            <a href="#" class="btn followUser"  data-guid="{{blogInfo.owner.guid}}" data-status="follow">FOLLOW +</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="#" class="btn forceLoginModal">FOLLOW +</a>
+                    {% endif %}
+
+                    <p>
+                        {{ blogInfo.owner.bio }}
+                    </p>
+                    <hr>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="count">257</span>
+                            <span class="action">following</span>
+                        </div>
+                        <div class="stat">
+                            <span class="count">257</span>
+                            <span class="action">followers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="count">27</span>
+                            <span class="action">articles</span>
+                        </div>
+                    </div><!--stats-->
+                    <div class="social-links-wrapper">
+                        <ul class="social-links">
+                            <li><a href="#"><span class="icon icon-faceook-inverted"></span><span class="sr-only">Facebook</span></a></li>
+                            <li><a href="#"><span class="icon icon-twitter-inverted"></span><span class="sr-only">Facebook</span></a></li>
+                        </ul>
+                    </div><!--social-links-wrapper-->
+                </div><!--author-info-->
+            </div><!--hero-image-wrapper-->
+            <div class="hero-action">
+                
+                {% if not _User.isGuest %}
+                    {% set isUserFollowingBlog = _User.isUserFollowing('blog', blogInfo.id) %}
+                    {% if isUserFollowingBlog %}
+                        <a href="#" class="btn followBlog" data-guid="{{blogInfo.guid}}" data-status="unfollow">FOLLOWING -</a>
+                    {% else %}
+                        <a href="#" class="btn followBlog" data-guid="{{blogInfo.guid}}" data-status="unfollow">FOLLOW +</a>
+                    {% endif %}
+                {% else %}
+                    <a href="#" class="btn forceLoginModal">FOLLOW +</a>
+                {% endif %}
+
+            </div><!--hero-action-->
+        </div><!--container-->
+    </section><!--blog-hero-->
+
+
+
+    <div class="content-block container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+            <div class="row">
+                <!--article blocks -->
+
+
+                    {% set rowCards = ['col-sm-8 card-lg', 'col-sm-4 card-md', 'col-sm-4 card-md', 'col-sm-4 card-md', 'col-sm-4 card-md', 'col-sm-4 card-md', 'col-sm-8 card-lg'] %}                                                                
+
+                    {% for i in 0..6 %}
+
+                        {% if articles[articleCount] %}                                                                
+                            {{this.render('partials/_single-article.twig', {article: articles[articleCount], containerClass:  rowCards[i] }) | raw }}
+                            {% set articleCount = articleCount + 1 %}
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div><!--row-->
+            </div><!--col-sm-9-->
+
+
+
+            <div class="col-md-3 col-sm-12">
+                <div class="row">
+
+                    {% set rowCards = ['col-sm-6 col-md-12 card-sm', 'col-sm-6 col-md-12 card-sm', 'col-sm-6 col-md-12 card-sm', 'col-sm-6 col-md-12 card-md'] %}                                                                
+                    {% for i in 0..3 %}
+
+                        {% if articles[articleCount] %}                                                                
+                            {{this.render('partials/_single-article.twig', {
+                                article: articles[articleCount], 
+                                containerClass:  rowCards[i] }) | raw }}
+                            {% set articleCount = articleCount + 1 %}
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div><!--row-->
+            </div><!--col-sm-3-->
+
+        </div><!--row-->
+    </div>
+
+    <div class="row-scroll">
+        <div class="content-block container">
+            
+            {% for i in 0..2 %}
+
+                {% if articles[articleCount] %}                                                                
+                    {{this.render('partials/_single-article.twig', {
+                        article: articles[articleCount], 
+                        imageSize: {width: 330, height: 235},
+                        containerClass:  'col-sm-4 card-rec' }) | raw }}
+                    {% set articleCount = articleCount + 1 %}
+                {% endif %}
+
+            {% endfor %}
+
+        </div><!--content-block-->
+    </div><!--row-scroll-->

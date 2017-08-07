@@ -1,0 +1,64 @@
+.site-main {
+    margin-top:80px;
+    margin-bottom:100px;
+
+    section {
+      margin-bottom:80px;
+    }
+
+
+    .home-main-stories {
+        height:400px;
+        margin-bottom:40px;
+    }
+
+    .most-popular {
+        >h2 {
+            font-size: rem(22);
+            color: color(red);
+            margin-bottom:13px;
+            line-height:1;
+        }
+    }
+
+    .section-background {
+        padding: 25px;
+        background:rgba(185,185,185,.2);
+    }
+
+    .section-header {
+        p {
+            margin:0;
+            font-family: $font-family-serif;
+            font-size: rem(14);
+            font-style:italic;
+            color:color(red);
+        }
+        
+        div.hk {
+            display:flex;
+            h2 {
+                flex-grow: 0;
+                font-size: rem(20);
+                font-weight:600;
+                margin-bottom:25px;
+
+            }
+            p {
+                flex-grow: 1;
+
+                &:after {
+                    content: '';
+                    display:block;
+                    height:1px;
+                    background:color(lightgrey);
+                    width:99%;
+                    margin-top: 18px;
+                    margin-left: 7px;
+                }
+            }
+        }
+
+    }
+
+}

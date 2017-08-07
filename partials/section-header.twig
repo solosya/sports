@@ -1,0 +1,49 @@
+{% set description = blogInfo.shortDescription | split('<¡¡>')[0] %}
+{% if description == "" %}
+	{% set description = blogInfo.excerpt %}
+{% endif %}
+
+
+{% set bannerFull = blogImage | _resizeImages({'width': 1400}) %}
+{% set bannerMedium = blogImage | _resizeImages({'width': 900}) %}
+{% set bannerMob = blogImage | _resizeImages({'width': 600}) %}
+
+<div class="header-image">
+	<picture>
+		<source media="(max-width: 620px)" srcset="{{bannerMob}}">
+		<source media="(max-width: 1200px)" srcset="{{bannerMedium}}">
+	    <img class="img-responsive" src="{{bannerFull}}">
+
+   
+
+	    {% if showDescription is not defined or showDescription != false %}
+		    <div class="container hidden-xs hidden-sm" >
+		        <div class="header-text">
+		            <h1>{{blogInfo.title}}</h1>
+		           	<div class="description">
+		           		<p>{{description | preg_replace('/^<([A-Z].+?)>/', '') | raw }}</p>
+		           	</div>
+		           	{# <p class="more">read more</p> #}
+		        </div>
+		    </div>
+	    {% endif %}
+
+</picture>
+
+</div>
+
+{% if showDescription is not defined or showDescription != false %}
+	<div class="header-container hidden-md hidden-lg row">
+	    <h1>{{blogInfo.title}}</h1>
+	    <div class="description">
+	    	{{description | preg_replace('/^<([A-Z].+?)>/', '') | raw }}
+	    </div>
+	   	{# <p class="more">read more</p> #}
+	</div>
+{% endif %}
+
+
+
+<div class="container">
+    {{this.render('breadcrumb.twig', {'crumb': crumb, networkData:networkData}) | raw}}
+</div>
