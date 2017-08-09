@@ -103,24 +103,7 @@
         <!-- End Google Analytics -->
     {% endif %}
     
-    {# {% set blogList = _Blog.getBlogList() %} #}
 
-{#     {% if blogList | length > 0 %}
-        <style type="text/css">
-            {% for blog in blogList %}
-                {% if blog.featuredColor is not empty %}
-                    {% set blogClass = 'card--blog_'~blog.id %}
-                    .card.{{blogClass | lower}} .title-section span {
-                        color: {{blog.featuredColor}} !important;
-                    }
-                    .card.{{blogClass | lower}} .caption_bottom .author_name {
-                        color: {{blog.featuredColor}} !important;
-                    }
-                {% endif %}
-            {% endfor%}
-        </style>
-    {% endif %}
- #}
     {{ this.head() }}
 
 </head>
