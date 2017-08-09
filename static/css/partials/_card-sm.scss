@@ -1,11 +1,12 @@
 .card-sm{
     @media screen and (min-width: $md-break){
-        @include card-image-top(auto, 160px);
-
         position:relative;
 
 
         a.card {
+            @include card-image-top(auto, 160px);
+
+
             > article {
                 position:relative;
 

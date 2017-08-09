@@ -11,101 +11,118 @@
 	}
 }
 
+@mixin gradientbefore() {
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		height:100%;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+        background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.0), #000000);
+        background-image: -o-linear-gradient(rgba(0, 0, 0, 0.0), #000000);
+        background-image: linear-gradient(rgba(0, 0, 0, 0.0), #000000);
+    }
+}
+
+@mixin gradientafter() {
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+        background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.0), #000000);
+        background-image: -o-linear-gradient(rgba(0, 0, 0, 0.0), #000000);
+        background-image: linear-gradient(rgba(0, 0, 0, 0.0), #000000);
+    }
+}
+
 
 @mixin card-image-size($width, $height) {
 	width: $width;
     height: $height;
 }
 
-@mixin card-image-none {
-	a.card {
-		> article {
-			> figure{
-				display:none;
-			}
-		}
+@mixin image-full($margin:0, $width:100%) {
+	> figure{
+		position: absolute;
+		left: $margin;
+		right: $margin;
+		top: 0;
+		height:100%;
+		width: $width;
 	}
 }
 
+@mixin card-image-full($margin: 0) {
+	
+	$width : 100%;
 
-@mixin card-image-full {
-	a.card {
-		> article {
-			> figure{
-				position: absolute;
-				left: 0;
-				top: 0;
-				height:100%;
-				width: 100%;
-			}
-			> .content {
-				position:relative;
-			}
-		}
+	@if $margin != 0 {
+		$width : auto
+	}
+
+	> article {
+		@include image-full($margin,$width);
 	}
 }
 
 @mixin card-image-left($width, $height:100%) {
-	a.card {
-		> article {
-			> figure{
-				@include card-image-size($width, $height);
-				float: left;
-			}
-			> .content {
-				display:block;
-				width:auto;
-			}
+	> article {
+		> figure{
+			@include card-image-size($width, $height);
+			float: left;
+		}
+		> .content {
+			display:block;
+			width:auto;
 		}
 	}
 }
 
 
 @mixin card-image-right($width, $height:100%) {
-	a.card {
-		> article {
-			> figure{
-				@include card-image-size($width, $height);
-				float: right;
-			}
-			> .content {
-				display:block;
-				width:auto;
-			}
+	> article {
+		> figure{
+			@include card-image-size($width, $height);
+			float: right;
+		}
+		> .content {
+			display:block;
+			width:auto;
 		}
 	}
 }
 
 
 @mixin card-image-top($width, $height:100%) {
-	a.card {
-		> article {
-			> figure{
-				@include card-image-size($width, $height);
-				float: none;
-			}
-			> .content {
-				display:block;
-			}
+	> article {
+		> figure{
+			@include card-image-size($width, $height);
+			float: none;
+		}
+		> .content {
+			display:block;
 		}
 	}
 }
 
 @mixin card-image-bottom($width, $height:100%) {
-	a.card {
-		> article {
+	> article {
 
-			@include flexbox;
-			@include flex-direction(column);
+		@include flexbox;
+		@include flex-direction(column);
 
-			> figure{
-				@include card-image-size($width, $height);
-				order:2;
-			}
-			> .content {
-				order:1;
-				display:block;
-			}
+		> figure{
+			@include card-image-size($width, $height);
+			order:2;
+		}
+		> .content {
+			order:1;
+			display:block;
 		}
 	}
 }
