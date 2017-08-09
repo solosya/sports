@@ -1,7 +1,7 @@
+{{ set(this, 'title', _Blog.getBlogTitle()) }}
 {% set networkData = _Network.getNetworkData() %}
 
-{% set blogInfo = _Blog.getBlog() %}
-{{ set(this, 'title', blogInfo.title) }}
+
 
 
 {{this.registerJs("CardController();")}}
@@ -11,109 +11,112 @@
 {% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
 {% set articles = articlesArr.articles %}
 
-{% set blogImage = "" %}
-{% if blogInfo.media['cover']['path'] is not empty %}
-    {% set blogImage = blogInfo.media['cover']['path'] %}
-{% endif %}    
+{% set events = _Event.getEvents() %}
 
-
-{% set sectionMap = blogInfo.blogHeaderMenu %}
 
 <!-- used to index each article as we loop over throughout the template -->
 {% set articleCount = 0 %}
 
 
 
-{% set seminars = [] %}
-{% for key, value in sectionMap %}
-    {% if value.blogTitle | lower == this.title | lower %}
-        {% set seminars = value['children'] %}
-    {% endif %}
-{% endfor %}
+    <main id="main" class="channel_container channel-main" role="main">
+        
 
 
 
-    
-        <section class="home-page-content">
+        <section class="row">
+            <div class="col-md-12 section-header">
+                <h2>National</h2>
+                <p>
+                    Nam porti tasse plat dictmst  blandit accaserio sln hac curabitur hendrerit 
+                    quam ac arcu facilisis faucibus. Curabitur tempus, urna sed semperc
+                </p>
+            </div>
+        </section>
+        
+        <section class="row">
+
+            <div class="col-md-8">
+                {% if articles[articleCount] %}
+                    {{this.render('partials/_single-article.twig', {
+                        article: articles[articleCount], 
+                        position: (articleCount+1),
+                        imageSize: {width: 640, height: 309},
+                        containerClass: 'card-main-2col card-main-2col-mobile'
+                    }) | raw}}
+                    {% set articleCount = articleCount + 1 %}
+                {% endif %}
 
 
-            <div class="header-image" style="background-image: url('{{blogImage}}')"></div>
+                {% for i in 0..4 if articles[articleCount] %}
+                    {{this.render('partials/_single-article.twig', {
+                        article: articles[articleCount], 
+                        position: (articleCount+1),
+                        imageSize: {width: 200, height: 140},
+                        containerClass: 'card-rec card-rec-mobile'
+                    }) | raw}}
+                    {% set articleCount = articleCount + 1 %}
+                {% endfor %}
+
+            </div>
 
 
-            <div class="container section">
 
-                <div class="row">
-                    <div class="col-sm-12 breadcrumb">
-                        Research to Practice > Overview
-                    </div>
+
+            <div class="col-md-4">
+
+                <div class="advert">
                 </div>
 
 
 
-                <div class="row">
 
-                    <div class="col-sm-12 col-md-7 main-content">
+                {% for i in 0..2 if articles[articleCount] %}
+                    {% set classes = ["card-sm card-sm-mobile", "card-sm-full", "card-sm card-sm-mobile"] %}
+                    {% set images = [false, false, true] %}
+                    {{this.render('partials/_single-article.twig', {
+                        article: articles[articleCount], 
+                        position: (articleCount+1),
+                        imageSuppress: images[i],
+                        imageSize: {width: 300, height: 185},
+                        containerClass: classes[i]
+                    }) | raw}}
+                    {% set articleCount = articleCount + 1 %}
+                {% endfor %}
+                {% set articleCount = articleCount + 1 %}
+                
+            </div>
 
-                        <h1>{{blogInfo.title}}</h1>
-
-                        <div class="description">
-                            {{blogInfo.shortDescription | raw}}
-                        </div>
-
-
-
-
-                        {% if seminars[articleCount] %}                                                                
-                        
-                            <ul class="section-list">
-                                {% for i in 0..10 %}
-                                    {% if seminars[articleCount] %} 
-                                        <li>
-                                            <a href="{{seminars[articleCount].link}}"> 
-                                                <p>July 17</p>
-                                                <h2>{{seminars[articleCount].blogTitle}}</h2>
-                                                <span class="link-arrow"></span>
-                                            </a>
-                                        </li>                                                        
-                                        {% set articleCount = articleCount + 1 %}
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div><!-- .col-sm-7-->
+        </section>    
 
 
 
 
 
-                    <div class="col-sm-12 col-md-5 sidebar">
-                        <h2>Upcoming Events</h2>
-                        <p>Coming in early 2017</p>
 
-                        <div class="upcoming">
-                            <div class="sidebar-date">
-                                <p class="date-day">25</p>
-                                <p class="date-month">July</p>
-                            </div>
+        <section class="row advert-banner-small">
+            <div class="advert"></div>
+        </section>
 
-                            <div class="sidebar-text">
 
-                                <h3>Child neglect</h3>
-                                <p>
-                                    This seminar will explore the somewhat intangible and 
-                                    grey areas of child neglect. Key approaches will be put 
-                                    forward with direct links to practice with families who 
-                                    face chronic neglect, and how this interplays with disadvantage. 
-                                </p>
-                            </div>
-                        </div>
- 
-                    </div>
+
+
+
+
+
+        <section class="row">
+            {% for i in 0..2 if articles[articleCount] %}
+                <div class="col-md-4">
+                    {{this.render('partials/_single-article.twig', {
+                        article: articles[articleCount], 
+                        position: (articleCount+1),
+                        imageSize: {width: 300, height: 180},
+                        containerClass: "card-sm-full"
+                    }) | raw}}
                 </div>
+                {% set articleCount = articleCount + 1 %}
+            {% endfor %}
+        </section>
 
 
-            </div><!-- .container-->
-        </section><!-- .home-page-content-->
-
-
-
+    </main><!-- .site-main -->
