@@ -11,8 +11,7 @@
                 position:relative;
 
                 > figure{
-                    overflow: hidden;
-                    margin-bottom:6px;
+
 
                     &.video {
                         &:before{
@@ -21,59 +20,78 @@
                     }
                 }
 
-
                 > .content{
 
-                    position:relative;
-                    padding: 0;
 
                     > .category{
                     }
 
                     > h2{
-                        font-weight: normal;
-                        font-size: rem(17);
-                        line-height:1.29;
-                        margin-top:5px;
-                        margin-bottom:10px;
-                        max-height:45px;
+
                     }
 
                     > p {
-                        display:none;
+
                     }
 
 
                     > .author{
 
-                        >p {
-                        }
                     }
-
-
                 }
             }
 
 
             &.article.without__image {
                 .content {
-                    padding-top:87px;
-                    height:100%;
 
-                    h2 {
-                        font-size: rem(17);
-                        font-weight:bold;
-                        max-height:52px;
-                    }
+                }
+            }
 
+            &.social {
+                .content {
                     > p {
-                        font-size: rem(13);
-                        display: block;
-                        max-height:100px;
-                        margin-bottom: 18px;
                     }
                 }
-            }   
+
+
+                &.facebook{
+                    .content{
+                        >p {
+                        }
+
+                    }
+                    &.without__image {
+                        .content {
+                        }
+                    }
+                }
+
+
+                &.twitter{
+                    .content{
+                        >p {
+                        }
+
+                    }
+                    &.without__image {
+                        .content {
+                        }
+                    }
+                }
+
+                &.instagram {
+                    .content{
+                        >p {
+                        }
+                    }
+                    &.without__content {
+                        .content{
+                        }
+                    }
+
+                }
+            }
         }
     }
 }
