@@ -1,233 +1,64 @@
-{% set logo = networkData.templatePath~'/static/images/logo.svg'%}
+{% set logo = networkData.templatePath~'/static/images/logo.svg' %}
 {% if networkData.logoMedia | length > 0 %}
-    {% set logo = _Media.getMediaUrl(networkData.logoMedia, 290, 80, {'crop': 'fit'} )%}
+    {% set logo = _Media.getMediaUrl(networkData.logoMedia, 290, 80, {'crop': 'fit'} ) %}
 {% endif %}
 
-
-
-
-
-<header id="masthead" class="site-header container-fluid">
-
-    <div id="mainHeader" class="site-header-main header__navigation showOnScroll">
-        
+<header id="masthead" class="site-header">
+    <div id="mainHeader" class="site-header-main header__navigation">
         <div class="header-top">
-
-            <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>00 Month 2017 - 00 Month 2020</p>
+                    <h1>{{ networkData.title }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container-full">
                 <div class="row">
                     <div class="col-xs-12">
-                        <a  class="navbar-brand" 
-                            href="{{networkData.defaultBlogUrl}}" 
-                            rel="Home" 
-                            tabindex="-1" 
-                            title="Home"
-                            style="background-image:url({{logo}})">
+                        <a class="navbar-brand"
+                           href="{{ networkData.defaultBlogUrl }}"
+                           rel="Home"
+                           tabindex="-1"
+                           title="Home"
+                           style="background-image:url({{ logo }})">
                         </a>
-                        
-
-
-                        <!--  ************ -->
-                        <!--  DESKTOP MENU -->
-                        <!--  ************ -->
-
-                        <nav class="sb-custom-menu">
-
+                        <nav class="primaryNav">
                             <div class="menuContainer">
-
-                                <ul id="menu-primary-menu" class="menu">
+                                <ul id="menuPrimaryMenu" class="menu">
+                                    <li class="filler"></li>
                                     {% set menuItems = blog.blogHeaderMenu %}
-                                    {% for parentItem in menuItems  %}
+                                    {% for parentItem in menuItems %}
 
-                                       {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : ''%}
-                                       {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}
+                                        {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : '' %}
+                                        {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}
 
-                                       <li>
-                                            <a href="{{parentItem.link |raw}}" class="{{activeClass}} {{externalClass}}" {% if parentItem.target != "" %}target="{{parentItem.target}}"{% endif %}>
+                                        <li>
+                                            <a href="{{ parentItem.link |raw }}"
+                                               class="{{ activeClass }} {{ externalClass }}"
+                                               {% if parentItem.target != "" %}target="{{ parentItem.target }}"{% endif %}>
                                                 {% if parentItem.label != "" %}
-                                                    {{parentItem.label}}
+                                                    {{ parentItem.label }}
                                                 {% elseif parentItem.blogTitle != "" %}
-                                                    {{parentItem.blogTitle}}
+                                                    {{ parentItem.blogTitle }}
                                                 {% elseif parentItem.pageTitle != "" %}
-                                                    {{parentItem.pageTitle}}
+                                                    {{ parentItem.pageTitle }}
                                                 {% endif %}
                                                 {% if parentItem.children is defined and parentItem.children | length > 0 %}
                                                     <span class="down-arrow"></span>
                                                 {% endif %}
                                             </a>
-
-    {#                                         {% if parentItem.children is defined and parentItem.children | length > 0 %}
-                                                 <ul class="sub-menu">
-                                                    {% for childItem in parentItem.children %}
-                                                        {% set externalClass = (childItem.isExternal) ? 'external-link' : '' %}
-                                                        <li>
-                                                            <a class="{{externalClass}}" href="{{childItem.link |raw}}" {% if childItem.target != "" %}target="{{childItem.target}}"{% endif %}>
-                                                             {{ ((childItem.label is empty) ? ((childItem.pageTitle is empty) ? childItem.blogTitle : childItem.pageTitle) : childItem.label)}}
-                                                            </a>
-                                                        </li>
-                                                   {% endfor %}
-                                                </ul>
-                                            {% endif %} #}
                                         </li>
                                     {% endfor %}
-
-                                    <li id="menu-item-search" class="menu-item menu-item-search">
-                                        <a href="#" class="search-icon"><span class="icon-search icon"></span><span class="sr-only">Expand search</span></a>
-                                    
-                                        <ul class="sub-menu normal-sub search-sub-menu">
-                                            <li class="search-container">
-                                                <fieldset>
-                                                    <form method="get" id="searchform" action="{{networkData.defaultBlogUrl}}/search">
-                                                        <label for="header-search" class="assistive-text sr-only">Search</label>
-                                                        <input type="text" class="field" name="s" id="header-search" placeholder="Search" required="">
-                                                        <button class="btn btn-default" type="submit" id="searchsubmit">
-                                                            <span class="icon icon-search-blk"></span>
-                                                            <span class="screen-reader-text"></span>
-                                                        </button>
-                                                    </form>
-                                                </fieldset>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-
-
-
+                                    <li class="filler"></li>
                                 </ul>
                             </div>
                         </nav>
-
-
-
-
-
-
-
-
-
-
-
-                        <!--  *********** -->
-                        <!--  MOBILE MENU -->
-                        <!--  *********** -->
-
-                        {# <nav id="sb-custom-menu" class="sb-custom-menu">
-
-                            <a href="#" id="menu-mobile" class="menu-mobile"></a>
-
-                            <div class="menuContainer">
-
-                                <div id="menu-search" class="secondary-menu menu-search">
-                                    <form method="get" id="searchformmob" action="{{networkData.defaultBlogUrl}}/search">
-                                        <div>
-                                            <input type="text" class="field" name="s" id="header-search" placeholder="Search" required="">
-                                        </div>
-                                        <button class="btn btn-default" type="submit" id="searchsubmit">
-                                            <span class="icon-search icon"></span>
-                                        </button>
-                                    </form>
-                                </div>
-
-
-                                <ul id="menu-primary-menu" class="menu mobile">
-                                    {% set menuItems = blog.blogHeaderMenu %}
-                                    {% for parentItem in menuItems  %}
-
-                                        {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : ''%}
-                                        {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}
-
-                                        <li>
-                                            <a href="{{parentItem.link |raw}}" class="{{activeClass}} {{externalClass}}" {% if parentItem.target != "" %}target="{{parentItem.target}}"{% endif %}>
-                                                {% if parentItem.label != "" %}
-                                                    {{parentItem.label}}
-                                                {% elseif parentItem.blogTitle != "" %}
-                                                    {{parentItem.blogTitle}}
-                                                {% elseif parentItem.pageTitle != "" %}
-                                                    {{parentItem.pageTitle}}
-                                                {% endif %}
-                                            </a>
-                                            <span class="list-arrow"></span>
-
-                                            {% if parentItem.children is defined and parentItem.children | length > 0 %}
-                                                  <span class="down-arrow"></span>
-                                                  <ul class="sub-menu">
-                                                    {% for childItem in parentItem.children %}
-                                                        {% set externalClass = (childItem.isExternal) ? 'external-link' : '' %}
-                                                        <li>
-                                                            <a class="{{externalClass}}" href="{{childItem.link |raw}}" {% if childItem.target != "" %}target="{{childItem.target}}"{% endif %}>
-                                                             {{ ((childItem.label is empty) ? ((childItem.pageTitle is empty) ? childItem.blogTitle : childItem.pageTitle) : childItem.label)}}
-                                                            </a>
-                                                        </li>
-                                                   {% endfor %}
-                                                </ul>
-                                            {% endif %}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </nav> #}
-
-
-
-
-
-
                     </div>
                 </div>
-            </div><!-- .container-->  
-        </div><!-- .header top-->  
-
-
-
-
-
-
-
-
-
-
-        <div class="header-bottom">
-            <ul class="auth-links">
-                <li><a href="#">LOG IN</a></li>
-                <li><a href="#">SIGN UP</a></li>
-            </ul>
-        </div><!-- .site-branding-top -->
-
-
-
-
-
-
-    {#  _____________________________________________________
-
-                            PROFILE WINDOW
-        _____________________________________________________  #}
-
-
-{#         <div id="header__menu">
-            <div class="profile__menu">
-                 {% if user.profileMedia.id != '' %}
-                        {% set profileImg = _Media.getMediaUrl(user.profileMedia, 80, 80, {radius: 'max', gravity: 'face', 'crop': 'thumb', type: 'user'}) %}
-                    {% else %}
-                        {% set profileImg = networkData.templatePath ~ "/static/images/icons/profile.svg" %}
-                    {% endif %}
-              <div class="profile__menu-image" style="background-image: url({{ profileImg }})"></div>
-              <div class="profile__menu-content">
-                <div class="profile__menu-name">{{ (user.firstname ~" "~ user.lastname) | truncate(15) | title}}</div>
-                <div class="profile__menu-email">{{user.email | truncate(23)}}</div>
-                <a href="{{_AppHelper.buildUrl('user/my-news')}}" class="profile__menu-button">My News</a>
-              </div>
-              <ul class="profile__menu-navigation">
-                  {% if _User.isAdminUser() %}
-                      <li><a class="profile__menu-navigation-link" href="https://{{networkData.defaultDomain['domain']}}/admin" target="_blank">Admin</a></li>
-                  {% endif %}
-                  <li><a class="profile__menu-navigation-link" href="{{blogUrl}}/profile/{{user.username}}">View Profile</a></li>
-                  <li><a class="profile__menu-navigation-link" href="https://{{networkData.defaultDomain['domain']}}/user/edit-profile">Settings</a></li>
-                  <li><a class="profile__menu-navigation-link" href="{{_AppHelper.getLogoffUrl()}}">Sign Out</a></li>
-              </ul>
-            </div>
-        </div>
- #}
-
+            </div><!-- .container-->
+        </div><!-- .header top-->
     </div><!-- .site-header-main -->
 </header>
 

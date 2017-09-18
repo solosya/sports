@@ -1,238 +1,40 @@
-.showOnScroll {
-    top:0 !important;
-}
-
-.fixHeader {
-    position:fixed !important;
-    width:100%;
-}
-
-#menu-search {
-    border:1px solid color(dark);
-    position: relative;
-    @media screen and (max-width: $mobile-break){
-        border:none;
-    }
-}
-
-
-.site-header.mobile-menu-active {
-    .site-header-main {
-        background:color(dark);
-
-        .header-top {
-            h1 {
-                color:white;
-            }
-
-            nav.sb-custom-menu {
-                > a {
-                    margin-top:0;
-                    background-image: url(../images/mobile-close.svg);
-                    background-size:cover;
-                    width:20px;
-                    height:20px;
-                }
-            }
-        }
-        .navbar-brand {
-
-            // background-size: 40px;
-        }
-
-    }
-}
-
 .site-header {
-    position:relative;
-    padding:0;
-    max-width:none;
-    z-index:140;
+    text-align: center;
 
+    .header-top {
+        max-height: 150px;
+        height: 150px;
+        padding-top: 33px;
 
-    .site-header-main {
-        @include transition(100000s);
-
-        background:#fff;
-        width:100%;
-        @media screen and (max-width: $mmd-break){
-            height:auto;
-        }
-        
-        input.field {
-            font-size: rem(16);
-
-
+        h1 {
+            font-size: rem(25px);
+            letter-spacing: 1.3px;
+            text-align: center;
+            color: rgb(183, 149, 110);
+            text-transform: uppercase;
         }
 
-        .header-top {
-            height:84px;
-            padding-top:30px;
-            background:black;
-
-            @media screen and (max-width: $sm-break) {
-                height:60px;
-            }
-
-            h1 {
-                position: relative;
-                top: -10px;
-                font-weight:lighter;
-                display:inline-block;
-                color:$black;
-                font-size: rem(26);
-                margin-left: 20px;
-                @media screen and (max-width: $sm-break) {
-                    font-size: rem(20);
-                    font-weight:300;
-                    position: absolute;
-                    top: 0;
-                    left: 50%;
-                    margin-top: 20px;
-                    margin-left: -70px;
-                }
-            }
-        }
-
-        .header-bottom {
-            padding:0;
-            margin-top:2px;
-            height:19px;
-            background:color(red);
-
-            @media screen and (max-width: $mmd-break){
-                display:none;
-            }
-
-            ul.auth-links {
-                float:right;
-                padding:0;
-                margin:0;
-                line-height:1;
-
-                >li {
-                    padding-left: 4px;
-                    padding-right: 6px;
-                    display:inline-block;
-
-                    >a {
-                        color:#fff;
-                        font-size: rem(11);
-                    }
-                }
-            }
-        }
-
-
-
-        .navbar-brand {
-            display:inline-block;
-            padding:0;
-            width: 140px;
-            height:37px;
-            background-repeat:no-repeat;
-            background-size:cover;
-
-            @media screen and (max-width: $mobile-break){
-                margin-top: 4px;
-                padding:8px;
-                width: 45px;
-                height:50px;
-                background-size: 140px;
-                background-repeat:no-repeat;
-            }
-
-
-        }
-        .navbar-right {
-            margin-top:25px;
-            @media screen and (max-width: $mobile-break){
-                margin-top:12px;
-            }
-
-
-
-            .section-links ul {
-                li {
-                    display:inline-block;
-                    margin-right:37px;
-                    
-                    a {
-                        font-family: $base-font-family;
-                        font-size: rem(14);
-                        color:white;
-                        letter-spacing: 2.2px;
-                    }
-                }
-                li.menu-item-search {
-                    width:40px;
-                    a {
-                        display:block;
-                    }
-                }
-            }
+        p {
+            font-size: rem(16px);
+            letter-spacing: 1.2px;
+            color: rgb(70, 67, 67);
         }
     }
 
-    .site-header-buffer {
-        height:15px;
-        background:black;
-
-        @media screen and (max-width: $mobile-break){
-            display:none;
-        }
-    }
-}
-
-
-/* Search box */
-.search-sub-menu{
-    form{
-        position: relative;
+    .header-bottom {
+        background-color: rgb(24, 51, 66);
+        min-height: 142px;
     }
 
-    input.field {
-        width: 80%;
-        background-color: transparent;
-        color: #1a1818;
-        font-size: 35px;
-        border: 0;
-        height: 20px;
-        margin-top: 11px;
-        outline: none;
+    .navbar-brand {
+        $logoSize: 94px;
 
-        @media screen and (max-width: $md-break){
-            width:78%;
-        }
-    }
-
-    input.submit{
-        position: absolute;
-        right: 0;
-        top:0;
-        background-image: url(../icons/search-blk.svg);
-        background-size: cover;
-        background-color: transparent;
-        width: 30px;
-        height: 30px;
-        border: 0;
-        font-size: 30px;
-        padding: 0 10px;
-    }
-
-    .search-container{
-        width: 100%;
-        margin: 0 auto;
-        float: none;
-        padding-top: 15px;
-        padding-bottom: 0px;
-        padding-left: 20px;
-        padding-right: 20px;
-        list-style: none;
-    }
-
-    .btn-default{
-        background-color: transparent;
-        border: 0;
+        background-color: rgb(255, 255, 255);
+        display: block;
+        width: $logoSize;
+        height: $logoSize;
+        background-size: contain;
+        border-radius: 50%;
+        margin: -($logoSize/2) auto 0;
     }
 }
