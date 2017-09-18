@@ -1,9 +1,10 @@
 {{ set(this, 'title', _Blog.getBlogTitle()) }}
 {% set networkData = _Network.getNetworkData() %}
 
+{{ this.registerJs("CardController();") }}
 
-{{this.registerJs("CardController();")}}
-
+{% set debugAllACards = false %}
+{% set debugArray = 0..13 %}
 {% set limit = 30 %}
 
 {% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
@@ -11,179 +12,143 @@
 
 
 <!-- used to index each article as we loop over throughout the template -->
-{% set articleCount = 0 %}
+{% set articleCount = 1 %}
 {% set dev = _AppHelper.getApplicationEnv() == 'DEV' ? true : false %}
 
 
-    <main id="main" class="site-main" role="main">
-        
-        <div class="container">
+<main id="main" class="site-main site-index" role="main">
+    <div class="hero-banner">
+        {% if articles[articleCount] %}
+            {{ this.render('partials/_single-article.twig', {
+                article: articles[articleCount],
+                position: articleCount + 1,
+                imageSize: {width:1800, height:900},
+                containerClass: 'card1-desktop card1-tablet card1-mobile home-feature',
+                dataObjectFit: 'cover'
+            }) | raw }}
+            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
+        {% endif %}
+    </div>
+    {% if debugAllACards %}
+        {% for t in 1..1 %}
+            <h1>Debug Card: {{ t }}</h1>
+            {% for i in debugArray if articles[i] %}
+                <h2>Debug Card: {{ t }}: {{ i }}</h2>
+                {{ this.render('partials/_single-article.twig', {
+                    article: articles[i],
+                    position: articleCount + 1,
+                    containerClass: 'home-feature card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                    dataObjectFit: 'cover'
+                }) | raw }}
+            {% endfor %}
+        {% endfor %}
 
-            <section class="home-main-stories">
+        <div class="container-fluid">
+            {% for t in 2..4 %}
+                <h1>Debug Card: {{ t }}</h1>
                 <div class="row">
-                    <div class="col-sm-9 col-md-6">
-                        {% if articles[articleCount] %}                                                                
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                imageSize: {width:630, height:400},
-                                containerClass: 'home-feature'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                        {% endif %}
-                    </div>
-
-
-                    {% if articles[articleCount] %}
-                    <div class="cold-sm-9 col-md-3">
-                        {% for i in 0..2 if articles[i] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                containerClass: 'feature-side'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                        {% endfor %}
-                    </div><!-- .row-->
-                    {% endif %}
-
+                    {% for i in debugArray if articles[i] %}
+                        {{ this.render('partials/_single-article.twig', {
+                            article: articles[i],
+                            position: articleCount + 1,
+                            containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                            dataObjectFit: 'cover'
+                        }) | raw }}
+                    {% endfor %}
                 </div>
-            </section><!-- .featured-slider-->
-
-
-
-
-
-
-            <section class="row five-cols top-stories-row">
-                
-                {% for i in 0..4 if articles[articleCount] %}
-                    {{this.render('partials/_single-article.twig', {
-                        article: articles[articleCount], 
-                        position: 1, 
-                        imageSize: {width:500},
-                        containerClass: 'col-sm-1 top-stories'
-                    }) | raw}}
-                    {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                {% endfor %}
-            </section>
-
-
-
-
-
-
-
-
-
-
-
-            <section class="middle">
-                <div class="row">
-                    <div class="col-md-2 most-popular">
-                        <h2>Most popular</h2>
-                        {# no need for position and no use of article count 
-                           as these cards won't be moved and will come from another feed #}
-                        {% for i in 0..4 if articles[i] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[i], 
-                                imageSuppress: true, 
-                                containerClass: 'card-popular'
-                            }) | raw}}
-                        {% endfor %}
-
-                    </div>
-
-                    <div class="col-md-2">
-                        {% if articles[articleCount] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                imageSize: {width:190},
-                                containerClass: 'card-sm'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                        {% endif %}
-                    </div>
-
-
-                    <div class="col-md-2">
-                        {% if articles[articleCount] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                imageSize: {width:190},
-                                containerClass: 'card-sm'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                        {% endif %}
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="ad-square"></div>
-                    </div>
-                </div>
-                    
-
-                <div class="row">
-                    <div class="col-md-3">
-                        {% if articles[articleCount] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                imageSize: {width:300},
-                                containerClass: 'card-sm-wide'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                        {% endif %}
-                    </div>
-
-
-                    <div class="col-md-3">
-                        {% if articles[articleCount] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                imageSize: {width:300},
-                                containerClass: 'card-sm-wide'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                        {% endif %}
-
-
-                    </div>
-                    <div class="col-md-3">
-                        {% for i in 0..1 if articles[articleCount] %}
-                            {{this.render('partials/_single-article.twig', {
-                                article: articles[articleCount], 
-                                position: articleCount + 1, 
-                                imageSize: {width:95},
-                                containerClass: 'card-xs'
-                            }) | raw}}
-                            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-                            
-                            {% if i == 0 %}
-                                <hr class="divide">
-                            {% endif %}
-                        {% endfor %}
-
-                    </div>
-                </div>
-
-            </section>
-
-
-
-
-
-
-
-            <section class="advert" style="background:gray;height:200px;">
-            </section>
-
+            {% endfor %}
         </div>
 
+        {% for t in 5..5 %}
+            <h1>Debug Card: {{ t }}</h1>
+            {% for i in debugArray if articles[i] %}
+                <h2>Testing {{ t }}: {{ i }}</h2>
+                {{ this.render('partials/_single-article.twig', {
+                    article: articles[i],
+                    position: articleCount + 1,
+                    containerClass: 'home-feature card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                    dataObjectFit: 'cover'
+                }) | raw }}
+            {% endfor %}
+        {% endfor %}
 
+        <div class="container-fluid">
+            {% for t in 6..7 %}
+                <h1>Debug Card: {{ t }}</h1>
+                <div class="row">
+                    {% for i in 0..13 if articles[i] %}
+                        {{ this.render('partials/_single-article.twig', {
+                            article: articles[i],
+                            position: articleCount + 1,
+                            containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                            dataObjectFit: 'cover'
+                        }) | raw }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
 
-    </main><!-- .site-main -->
+    {% endif %}
+
+    <div class="container-fluid">
+        <div class="row">
+            {% if articles[articleCount] %}
+                {% set articleView = ['card2-desktop card2-mobile', 'card3-desktop card3-mobile', 'card4-desktop card4-mobile', 'card4-desktop card4-mobile'] %}
+                {% for key, value in articleView if articles[key] %}
+                    {{ this.render('partials/_single-article.twig', {
+                        article: articles[articleCount],
+                        position: articleCount + 1,
+                        containerClass: 'testing ' ~ value
+                    }) | raw }}
+                    {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if articles[articleCount] %}
+                {% for i in 0..3 if articles[i] %}
+                    {{ this.render('partials/_single-article.twig', {
+                        article: articles[3],
+                        position: articleCount + 1,
+                        containerClass: 'card6-desktop'
+                    }) | raw }}
+                    {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% if articles[articleCount] %}
+        {{ this.render('partials/_single-article.twig', {
+            article: articles[articleCount],
+            position: articleCount + 1,
+            containerClass: 'card5-desktop'
+        }) | raw }}
+        {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
+    {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            {% if articles[articleCount] %}
+                {% set articleView = [
+                'card4-desktop',
+                'card4-desktop',
+                'card3-desktop',
+                'card4-desktop',
+                'card4-desktop',
+                'card4-desktop',
+                'card4-desktop',
+                'card3-desktop',
+                'card4-desktop',
+                'card4-desktop',
+                ] %}
+                {% for key, value in articleView if articles[key] %}
+                    {{ this.render('partials/_single-article.twig', {
+                        article: articles[articleCount],
+                        position: articleCount + 1,
+                        containerClass: 'testing ' ~ value
+                    }) | raw }}
+                    {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</main><!-- .site-main -->
