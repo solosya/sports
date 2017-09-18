@@ -3,45 +3,42 @@
 @import "bootstrap";
 @import "functions";
 @import "mixins";
-@import "login";
-@import "profile";
-@import "user_profile";
-@import "user_posts";
-// @import "profile-admin";
-@import "modal";
 
+//Stuff
+@import "partials/login";
+@import "partials/profile";
+@import "partials/user_profile";
+@import "partials/user_posts";
+// @import "profile-admin";
+@import "partials/modal";
 
 
 //Partials
-@import "common";
-@import "placeholder";
-@import "site-footer";
+@import "partials/common";
+@import "partials/placeholder";
+@import "partials/site-footer";
 
 //Header
-@import "primary-menu";
-@import "site-header";
+@import "partials/primary-menu";
+@import "partials/site-header";
 
-//Home page
-@import "page-index";
-@import "page-search";
+@import "partials/page-index";
+@import "partials/page-search";
 
 
-//Article page
-@import "article";
+@import "partials/article";
+//@import "partials/blog";
+//@import "partials/channel";
 
 //Section page
-@import "section-page";
+@import "partials/section-page";
 
 //Static Pages
-
-
-@import "event";
-
+@import "partials/event";
 
 
 // layouts
 
 
 //Cards
-@import "card";
-@import "card-sm";
+@import "partials/card";

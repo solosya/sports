@@ -28,7 +28,9 @@
     <link rel="shortcut icon" href="{{favicon}}" />
     <link rel="icon" href="{{favicon}}" sizes="any" type="image/svg+xml" />
 
-    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7018996/6322372/css/fonts.css" />    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7018996/6322372/css/fonts.css" />
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     
     {% set primaryFont = networkData['styling']['fonts']['primaryFont'] %}
     {% set secFont = networkData['styling']['fonts']['secondaryFont'] %}
@@ -45,16 +47,12 @@
 
     {% set isPage = 'content_box_page' in _Page.getBodyClass() and 'page-contact-us' not in _Page.getBodyClass() %}
 
-
     {% if _AppHelper.getApplicationEnv() == 'PROD'%}
-        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/concat.min.css?v=1483a4ca" type="text/css" media="all">
-
+        <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/vendor.min.css?v=6431c067" type="text/css" media="all">
+        <link rel='stylesheet' href='{{networkData.templatePath}}/static/deploy/main.min.css?v=6b1257f6' type='text/css' media='all' />
     {% else %}
-{#             <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/jquery.fancybox.css?ver=2" />
-        <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/animate.css?ver=1" />
-        <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/mediaelementplayer.css?ver=1" /> #}
-
-        <link rel='stylesheet' href='{{networkData.templatePath}}/static/deploy/concat.css' type='text/css' media='all' />
+        <link rel='stylesheet' href='{{networkData.templatePath}}/static/deploy/vendor.css' type='text/css' media='all' />
+        <link rel='stylesheet' href='{{networkData.templatePath}}/static/deploy/main.css' type='text/css' media='all' />
     {% endif %}
 
     {% if isPage %}
@@ -67,7 +65,7 @@
 
 
 
-    <script src="https://use.typekit.net/mwx4nhf.js"></script>
+    <script src="https://use.typekit.net/kcc6vnr.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script> 
 
 

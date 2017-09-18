@@ -1,18 +1,19 @@
 //Fonts
-$font-family-sans-serif:    "Poppins", Helvetica, Arial, sans-serif;
-$font-family-serif:    		"PT Serif", "Times New Roman", Times, serif;
-$base-font-family: 			"Poppins", Helvetica, Arial, sans-serif !default;
-// $headings-font-family:      "adelle-sans", Helvetica, Arial, sans-serif;
-
+$font-family-primary: "acumin-pro", Helvetica, Arial, sans-serif;
+$font-family-secondary: "Oswald", Helvetica, Arial, sans-serif;
+$base-font-family: 			$font-family-primary !default;
 
 $font-size-base:            16px;
-$font-unit:                 0em; 
+$font-unit:                 0em;
 $browser-context:           $font-size-base;
 $baseFontSize:				16px; /* ($baseFontSize * 1) + 0px; */
 
+//Grid Structure
+$grid-columns: 12;
+$grid-gutter-width: 30px;
 
 // //colors
-$brand-primary:             #000; 
+$brand-primary:             #000;
 $brand-secondary:           #e22f22;
 
 $dark-color:       			#212427;
@@ -46,28 +47,27 @@ $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
 
 $colors: (
-	facebook:    		#3d5c95,
-	twitter:     		#2eb1eb,
-	google-plus: 		#f37b65,
-	instagram:   		#9f1e97,
-	linkedin:    		#0077b5,
-	youtube:     		#e34336,
-    vimeo:       		#00b3ec,
-						
-    lightgrey: 			rgba(74,74,74,.3),
-    mediumgrey: 		rgba(74,74,74,.7),
+		facebook:    		#3d5c95,
+		twitter:     		#2eb1eb,
+		google-plus: 		#f37b65,
+		instagram:   		#9f1e97,
+		linkedin:    		#0077b5,
+		youtube:     		#e34336,
+		vimeo:       		#00b3ec,
 
-	darkgrey: 			#4A4A4A,
-	red:				#F03746,
-	grey:          		#B9B9B9,
-	offwhite:  	  		#F1F1F1,
+		lightgrey: 			rgba(74,74,74,.3),
+		mediumgrey: 		rgba(74,74,74,.7),
+
+		darkgrey: 			#4A4A4A,
+		red:				#F03746,
+		grey:          		#B9B9B9,
+		offwhite:  	  		#F1F1F1,
 );
 
 
+$fluid-container-width: 1325px + $grid-gutter-width;
 
 //Responsive break points
-
-
 $header-break:              992px;
 $large-break:				1450px;
 $md-break:                  1200px; /* col-lg  */
@@ -86,7 +86,6 @@ $sticked-logo-width:        34px;
 $navbar-height:             70px;
 
 $center:					center;
-
 
 $media-desktop: "screen and (max-width: 1194px)";
 $media-ipadLandscape: "screen and (min-width : 992px) and (max-width : 1024px)";
