@@ -1,3 +1,27 @@
+@mixin cardHeight($height) {
+	height: $height;
+	margin-top: $grid-gutter-width /2;
+	margin-bottom: $grid-gutter-width /2;
+
+	.card {
+		height: $height;
+	}
+
+	article {
+		display: block;
+	}
+
+	figure {
+		height: $height;
+		picture {
+			height: $height;
+			img {
+				height: $height;
+			}
+		}
+	}
+}
+
 @mixin tintbefore($value:0.4) {
 	&:before {
 	  content: '';

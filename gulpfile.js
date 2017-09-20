@@ -75,7 +75,7 @@ gulp.task('sass', function () {
         .pipe(sass({
             outputStyle: 'nested' // Options: nested, expanded, compact, compressed
         }).on('error', sass.logError))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 10', 'opera 12.1', 'ios 6', 'android 4'))
+        //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 10', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./static/deploy'));
 });

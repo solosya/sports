@@ -1,0 +1,134 @@
+.card4 {
+    @include cardHeight(353px);
+    background: rgb(255, 255, 255);
+    overflow: hidden;
+
+    article {
+        figure {
+            height: 200px;
+            overflow: hidden;
+
+            picture, img {
+                width: 100%;
+                object-fit: cover;
+                height: 200px;
+            }
+        }
+    }
+
+    a.instagram.without__content figure {
+        height: 353px;
+        picture, img {
+            height: 353px;
+        }
+    }
+
+    .content {
+        //98px
+        padding: 26px 30px 0;
+
+        h2, p {
+            font-size: rem(18px);
+            font-weight: 600;
+            line-height: 1.22;
+            max-height: 3 * (18px * 1.22);
+        }
+
+        time {
+            display: none;
+        }
+    }
+
+    .without__image .content {
+        padding-top: 98px;
+
+        h2, p {
+            font-size: rem(20px);
+            line-height: 1.3;
+            max-height: 4 * (20px * 1.3);
+        }
+    }
+
+    .category {
+
+        font-size: rem(10.5px);
+        font-weight: 600;
+        line-height: 1.43;
+        color: rgb(183, 149, 110);
+        text-transform: uppercase;
+
+
+        &:after {
+            content: "";
+            display: block;
+            width: 18px;
+            border-top: solid 2px rgb(183, 149, 110);
+            margin: 6px 0 15px;
+        }
+    }
+
+    .author, .excerpt {
+        display: none;
+    }
+
+    // Icons
+    a:after, a.instagram.without__content:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 61px;
+        height: 61px;
+    }
+
+    a.withImage__content:after {
+        top: 200px - 61px;
+    }
+
+    a.article:after {
+        background-image: url(../images/article-icon.svg);
+    }
+
+    a.instagram:after {
+        background-image: url(../images/instagram-icon.svg);
+    }
+
+    a.twitter:after {
+        background-image: url(../images/twitter-icon.svg);
+    }
+
+    a.facebook:after {
+        background-image: url(../images/facebook-icon.svg);
+    }
+
+    a.vimeo:after {
+        background-image: url(../images/vimeo-icon.svg);
+    }
+
+    a.youtube:after {
+        background-image: url(../images/youtube-icon.svg);
+    }
+
+    a.audio:after {
+        background-image: url(../images/audio-icon.svg);
+    }
+}
+
+.card4 {
+    &-desktop {
+        @extend .card4 !optional;
+        @media (min-width: $sm-break) {
+        }
+    }
+
+    &-tablet {
+        @extend .card4 !optional;
+    }
+
+    &-mobile {
+        @extend .card4 !optional;
+        @media (max-width: $sm-break) {
+
+        }
+    }
+}

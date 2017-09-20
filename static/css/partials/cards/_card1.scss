@@ -1,0 +1,236 @@
+.card1 {
+    @include cardHeight(800px);
+    background: rgb(255, 255, 255);
+    overflow: hidden;
+
+    article:after {
+        clear: both;
+    }
+
+    figure {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        float: left;
+
+        picture, img {
+            width: 100%;
+            object-fit: cover;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            opacity: 0.8;
+            mix-blend-mode: multiply;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.23) 23%, rgb(0, 0, 0));
+        }
+    }
+
+    .category {
+        display: inline-block;
+        font-size: rem(10.5px);
+        font-weight: 600;
+        line-height: 1.43;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+
+        &:after {
+            content: "";
+            display: block;
+            width: 18px;
+            border-top: solid 2px rgb(255,255,255);
+            margin: 6px 0 15px;
+        }
+    }
+
+    .content {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 9.7%;
+        width: $fluid-container-width;
+        margin: 0 auto;
+        padding: 0;
+        color: rgb(255,255,255);
+        text-align: left;
+
+        > * {
+            max-width: 485px;
+        }
+
+        h2 {
+            font-size: rem(40px);
+            font-weight: 500;
+            line-height: 1.1;
+            max-height: 3 * (40px * 1.1);
+        }
+
+        .excerpt {
+            font-size: rem(15px);
+            line-height: 1.47;
+            text-align: left;
+            max-height: 3 * (15px * 1.47);
+            margin-top: 16px;
+        }
+
+        .author p {
+            font-size: rem(12px);
+            line-height: 1.25;
+            padding-top: 16px;
+        }
+
+        time {
+            display: none;
+        }
+    }
+
+    a.social {
+        p {
+            font-size: rem(38px);
+            font-weight: 500;
+            line-height: 1.16;
+            max-height: 3 * (38px * 1.16);
+        }
+    }
+
+    a.withImage__content {
+        figure {
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgb(178, 178, 178);
+                opacity: 0.2;
+            }
+        }
+    }
+
+    .author {
+        display: none;
+    }
+
+    a.without__image, a.article {
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgb(42, 90, 114);
+        }
+    }
+
+    a.article.withImage__content {
+        figure {
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgb(31, 31, 31);
+                opacity: 0.4;
+            }
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            float: none;
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    .author img {
+        display: none;
+    }
+
+    .content:before {
+        content: "";
+        display: block;
+        position: relative;
+        width: 61px;
+        height: 61px;
+        background-size: 100% 100%;
+        margin-bottom: 15px;
+    }
+
+    a.article {
+        &:after, .content:before {
+            //background-image: url(../images/article-icon.svg);
+        }
+    }
+
+    a.instagram {
+        &:after, .content:before {
+            background-image: url(../images/instagram-icon.svg);
+        }
+    }
+
+    a.twitter {
+        &:after, .content:before {
+            background-image: url(../images/twitter-icon.svg);
+        }
+    }
+
+    a.facebook {
+        &:after, .content:before {
+            background-image: url(../images/facebook-icon.svg);
+        }
+    }
+
+    a.vimeo {
+        &:after, .content:before {
+            background-image: url(../images/vimeo-icon.svg);
+        }
+    }
+
+    a.youtube {
+        &:after, .content:before {
+            background-image: url(../images/youtube-icon.svg);
+        }
+    }
+
+    a.audio {
+        &:after, .content:before {
+            background-image: url(../images/audio-icon.svg);
+        }
+    }
+
+    a.gallery {
+        &:after, .content:before {
+            background-image: url(../images/gallery-icon.svg);
+        }
+    }
+
+}
+
+.card1 {
+    &-desktop {
+        @extend .card1 !optional;
+        @media (min-width: $sm-break) {
+        }
+    }
+
+    &-tablet {
+        @extend .card1 !optional;
+    }
+
+    &-mobile {
+        @extend .card1 !optional;
+        @media (max-width: $sm-break) {
+
+        }
+    }
+}

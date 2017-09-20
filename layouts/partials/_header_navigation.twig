@@ -14,52 +14,51 @@
             </div>
         </div>
         <div class="header-bottom">
-            <div class="container-full">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <a class="navbar-brand"
-                           href="{{ networkData.defaultBlogUrl }}"
-                           rel="Home"
-                           tabindex="-1"
-                           title="Home"
-                           style="background-image:url({{ logo }})">
-                        </a>
-                        <nav class="primaryNav">
-                            <div class="menuContainer">
-                                <ul id="menuPrimaryMenu" class="menu">
-                                    <li class="filler"></li>
-                                    {% set menuItems = blog.blogHeaderMenu %}
-                                    {% for parentItem in menuItems %}
 
-                                        {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : '' %}
-                                        {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}
+            <div class="row">
+                <div>
+                    <a class="navbar-brand"
+                       href="{{ networkData.defaultBlogUrl }}"
+                       rel="Home"
+                       tabindex="-1"
+                       title="Home"
+                       style="background-image:url({{ logo }})">
+                    </a>
+                    <nav class="primaryNav">
+                        <div class="menuContainer">
+                            <ul id="menuPrimaryMenu" class="menu">
+                                <li class="filler"></li>
+                                {% set menuItems = blog.blogHeaderMenu %}
+                                {% for parentItem in menuItems %}
 
-                                        <li>
-                                            <a href="{{ parentItem.link |raw }}"
-                                               class="{{ activeClass }} {{ externalClass }}"
-                                               {% if parentItem.target != "" %}target="{{ parentItem.target }}"{% endif %}>
-                                                {% if parentItem.label != "" %}
-                                                    {{ parentItem.label }}
-                                                {% elseif parentItem.blogTitle != "" %}
-                                                    {{ parentItem.blogTitle }}
-                                                {% elseif parentItem.pageTitle != "" %}
-                                                    {{ parentItem.pageTitle }}
-                                                {% endif %}
-                                                {% if parentItem.children is defined and parentItem.children | length > 0 %}
-                                                    <span class="down-arrow"></span>
-                                                {% endif %}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                    <li class="filler"></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
+                                    {% set activeClass = (parentItem.link == _AppHelper.getServerUrl()) ? 'active' : '' %}
+                                    {% set externalClass = (parentItem.isExternal) ? 'external-link' : '' %}
+
+                                    <li>
+                                        <a href="{{ parentItem.link |raw }}"
+                                           class="{{ activeClass }} {{ externalClass }}"
+                                           {% if parentItem.target != "" %}target="{{ parentItem.target }}"{% endif %}>
+                                            {% if parentItem.label != "" %}
+                                                {{ parentItem.label }}
+                                            {% elseif parentItem.blogTitle != "" %}
+                                                {{ parentItem.blogTitle }}
+                                            {% elseif parentItem.pageTitle != "" %}
+                                                {{ parentItem.pageTitle }}
+                                            {% endif %}
+                                            {% if parentItem.children is defined and parentItem.children | length > 0 %}
+                                                <span class="down-arrow"></span>
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                <li class="filler"></li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
-            </div><!-- .container-->
-        </div><!-- .header top-->
-    </div><!-- .site-header-main -->
+            </div>
+        </div>
+    </div>
 </header>
 
 

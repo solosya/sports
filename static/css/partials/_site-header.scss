@@ -1,10 +1,21 @@
 .site-header {
     text-align: center;
 
+    .header-top, .header-bottom {
+        @include container-fixed;
+        padding-left: 0;
+        padding-right: 0;
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
     .header-top {
         max-height: 150px;
         height: 150px;
         padding-top: 33px;
+        background-color: rgb(255,255,255);
 
         h1 {
             font-size: rem(25px);

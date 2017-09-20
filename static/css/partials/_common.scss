@@ -20,8 +20,8 @@ body {
     // overflow-y:scroll;
     -webkit-overflow-scrolling: touch;
     color: color(dark);
-    // background: #fff;
-    font-family: $font-family-sans-serif;
+    background: rgba(178, 178, 178, 0.2);
+    font-family: $font-family-primary;
 
     // @media screen and (max-width: $sm-break){
     //     overflow-x: hidden;
@@ -32,11 +32,19 @@ body {
     max-width: $fluid-container-width;
 }
 
+.container-full {
+    @include container-fixed;
+}
+
 @media (max-width: $sm-break) {
     .container-fluid {
         margin-left: 20px;
         margin-right: 20px;
     }
+}
+
+.col-sidebar {
+    padding-left: 20%;
 }
 
 fieldset {

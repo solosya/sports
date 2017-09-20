@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7018996/6322372/css/fonts.css"/>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600,700' rel='stylesheet' type='text/css'>
 
     {% set primaryFont = networkData['styling']['fonts']['primaryFont'] %}
     {% set secFont = networkData['styling']['fonts']['secondaryFont'] %}
@@ -51,7 +51,7 @@
     {% if _AppHelper.getApplicationEnv() == 'PROD' %}
         <link rel="stylesheet" href="{{ networkData.templatePath }}/static/deploy/vendor.min.css?v=6431c067"
               type="text/css" media="all">
-        <link rel='stylesheet' href='{{ networkData.templatePath }}/static/deploy/main.min.css?v=4765acca'
+        <link rel='stylesheet' href='{{ networkData.templatePath }}/static/deploy/main.min.css?v=6adbef29'
               type='text/css' media='all'/>
     {% else %}
         <link rel='stylesheet' href='{{ networkData.templatePath }}/static/deploy/vendor.css' type='text/css'

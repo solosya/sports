@@ -3,7 +3,7 @@
 
 {{ this.registerJs("CardController();") }}
 
-{% set debugAllACards = false %}
+{% set debugAllACards = true %}
 {% set debugArray = 0..13 %}
 {% set limit = 30 %}
 
@@ -17,18 +17,18 @@
 
 
 <main id="main" class="site-main site-index" role="main">
-    <div class="hero-banner">
-        {% if articles[articleCount] %}
-            {{ this.render('partials/_single-article.twig', {
-                article: articles[articleCount],
-                position: articleCount + 1,
-                imageSize: {width:1800, height:900},
-                containerClass: 'card1-desktop card1-tablet card1-mobile home-feature',
-                dataObjectFit: 'cover'
-            }) | raw }}
-            {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
-        {% endif %}
-    </div>
+    {#<div class="hero-banner">#}
+    {#{% if articles[articleCount] %}#}
+    {#{{ this.render('partials/_single-article.twig', {#}
+    {#article: articles[articleCount],#}
+    {#position: articleCount + 1,#}
+    {#imageSize: {width:1800, height:900},#}
+    {#containerClass: 'card1-desktop card1-tablet card1-mobile home-feature',#}
+    {#dataObjectFit: 'cover'#}
+    {#}) | raw }}#}
+    {#{% set articleCount = (dev) ? articleCount : articleCount + 1 %}#}
+    {#{% endif %}#}
+    {#</div>#}
     {% if debugAllACards %}
         {% for t in 1..1 %}
             <h1>Debug Card: {{ t }}</h1>
@@ -44,48 +44,53 @@
         {% endfor %}
 
         <div class="container-fluid">
-            {% for t in 2..4 %}
-                <h1>Debug Card: {{ t }}</h1>
-                <div class="row">
-                    {% for i in debugArray if articles[i] %}
-                        {{ this.render('partials/_single-article.twig', {
-                            article: articles[i],
-                            position: articleCount + 1,
-                            containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
-                            dataObjectFit: 'cover'
-                        }) | raw }}
+            <div class="col-xs-8">
+                {% for t in 2..3 %}
+                    <h1>Debug Card: {{ t }}</h1>
+                    <div class="row">
+                        {% for i in debugArray if articles[i] %}
+                            {{ this.render('partials/_single-article.twig', {
+                                article: articles[i],
+                                position: articleCount + 1,
+                                containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                                dataObjectFit: 'cover'
+                            }) | raw }}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-xs-4">
+                <div class="col-sidebar">
+                    {% for t in 4..4 %}
+                        <h1>Debug Card: {{ t }}</h1>
+                        <div class="row">
+                            {% for i in debugArray if articles[i] %}
+                                {{ this.render('partials/_single-article.twig', {
+                                    article: articles[i],
+                                    position: articleCount + 1,
+                                    containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                                    dataObjectFit: 'cover'
+                                }) | raw }}
+                            {% endfor %}
+                        </div>
                     {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-
-        {% for t in 5..5 %}
-            <h1>Debug Card: {{ t }}</h1>
-            {% for i in debugArray if articles[i] %}
-                <h2>Testing {{ t }}: {{ i }}</h2>
-                {{ this.render('partials/_single-article.twig', {
-                    article: articles[i],
-                    position: articleCount + 1,
-                    containerClass: 'home-feature card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
-                    dataObjectFit: 'cover'
-                }) | raw }}
-            {% endfor %}
-        {% endfor %}
-
-        <div class="container-fluid">
-            {% for t in 6..7 %}
-                <h1>Debug Card: {{ t }}</h1>
-                <div class="row">
-                    {% for i in 0..13 if articles[i] %}
-                        {{ this.render('partials/_single-article.twig', {
-                            article: articles[i],
-                            position: articleCount + 1,
-                            containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
-                            dataObjectFit: 'cover'
-                        }) | raw }}
-                    {% endfor %}
-                </div>
-            {% endfor %}
+            </div>
+            <div class="col-sm-12">
+                {% for t in 5..5 %}
+                    <h1>Debug Card: {{ t }}</h1>
+                    <div class="row">
+                        {% for i in debugArray if articles[i] %}
+                            {{ this.render('partials/_single-article.twig', {
+                                article: articles[i],
+                                position: articleCount + 1,
+                                containerClass: 'card' ~ t ~ '-desktop card' ~ t ~ '-tablet card' ~ t ~ '-mobile',
+                                dataObjectFit: 'cover'
+                            }) | raw }}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
     {% endif %}
