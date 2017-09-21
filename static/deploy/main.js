@@ -643,7 +643,21 @@ Card.prototype.events = function()
     });
 };
 (function ($) {
-    
+    $( document ).ready(function() {
+        $(".search-icon").on('click', function () {
+            $("#menu-item-search ul").toggleClass('active');
+        });
+
+        if($(".hero-banner").length > 0) {
+            $('body').addClass('hasHero');
+        }
+
+        $('.navbar-toggler').on('click', function() {
+            $('#menu-primary-menu').toggleClass('active');
+            $('.site-header').toggleClass('activeNav');
+        })
+    });
+
     // $('.video-player').videoPlayer();
     
     // $("img.lazyload").lazyload({

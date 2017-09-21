@@ -1,12 +1,12 @@
 {% import "quotes.twig" as quotes %}
 
 
-{% set imageSuppress = imageSuppress is defined and imageSuppress == 'true' ? 'true' : 'false'  %}
-{% set swap = swap is defined and swap == 'false' ? '' : 'swap'  %}
-{% set lightbox = ''  %}
+{% set imageSuppress = imageSuppress is defined and imageSuppress == 'true' ? 'true' : 'false' %}
+{% set swap = swap is defined and swap == 'false' ? '' : 'swap' %}
+{% set lightbox = '' %}
 {% set articleImg = '' %}
 
-{% if behaviour is defined %} 
+{% if behaviour is defined %}
     {% if behaviour == 'noclick' %}
         {% set article = article | merge({'url' : 'javascript: void(0)'}) %}
     {% elseif behaviour == 'lightbox' %}
@@ -30,89 +30,90 @@
     {% set promotedClass = (article.isPromoted) ? 'ad_icon' : '' %}
     {% set hasArticleMediaClass = (article.hasMedia == 'TRUE' or article.hasPreviewMedia == 'TRUE') ? 'withImage__content': 'without__image' %}
 
-    {% set publishDate = _AppHelper.getDateTimeBasedOnTimezone(article.publishDate, 'F, Y') %}
+    {% set publishDate = _AppHelper.getDateTimeBasedOnTimezone(article.publishDate, 'm F Y') %}
     {# {% set publishDate = _AppHelper.getDefaultTimezoneDateTime(article.publishDate) %} #}
 
     {% set profileImg = _Media.getMediaUrl(article.createdBy['media'], 34, 34, {radius: 'max', gravity: 'face', 'crop': 'thumb', type: 'user'}) %}
-    
-    {% set articleTitle =  quotes.smarten(titleTruncateLength is defined ? article.title | truncate(titleTruncateLength) : article.title)  %}
+
+    {% set articleTitle =  quotes.smarten(titleTruncateLength is defined ? article.title | truncate(titleTruncateLength) : article.title) %}
 
     {% set figureClass =  article.featuredMedia['type'] == 'video' ? 'video' : '' %}
 
 
-    <div class="{{containerClass}}" data-title="{{ articleTitle | raw }}">
+    <div class="{{ containerClass }}" data-title="{{ articleTitle | raw }}">
         {% set articleImgSmall = _Media.getMediaUrl(article.featuredMedia,500, 500, {'crop': 'fill', 'gravity': 'faces'} ) %}
         {% set articleImg = _Media.getMediaUrl(article.featuredMedia,imgWidth, imgHeight, {'crop': 'fill', 'gravity': 'faces'} ) %}
 
-        <a  href="{{article.url}}" 
-            class="{{swap}} card article {{hasArticleMediaClass}}" 
-            data-id="{{article.articleId}}" 
-            data-guid="{{article.articleId}}" 
-            data-position="{{position}}" 
-            data-social="0"
-            data-article-image="{{articleImg}}" 
-            data-article-text="{{Helper.htmlToText(article.title, -1) | raw | escape('html')}}">
+        <a href="{{ article.url }}"
+           class="{{ swap }} card article {{ hasArticleMediaClass }}"
+           data-id="{{ article.articleId }}"
+           data-guid="{{ article.articleId }}"
+           data-position="{{ position }}"
+           data-social="0"
+           data-article-image="{{ articleImg }}"
+           data-article-text="{{ Helper.htmlToText(article.title, -1) | raw | escape('html') }}">
 
-            <article class="{{lightbox}}">
+            <article class="{{ lightbox }}">
                 {% if (article.hasMedia == 'TRUE' or article.hasPreviewMedia == 'TRUE') and imageSuppress == 'false' %}
-                    <figure class="{{figureClass}}">
+                    <figure class="{{ figureClass }}">
                         <picture>
-                            <source media="(max-width: 620px)" srcset="{{articleImgSmall}}">
-                            <img class="img-responsive" src="{{articleImg}}" data-original="{{articleImg}}"  {% if articleImg is not empty %} style="background-image:url('{{placeholder}}');" {%endif%}>
+                            <img class="img-responsive" data-object-fit="{{ dataObjectFit }}" src="{{ articleImg }}"
+                                 data-original="{{ articleImg }}" {% if articleImg is not empty %} style="background-image:url('{{ placeholder }}');" {% endif %}>
                         </picture>
                     </figure>
                 {% endif %}
 
 
                 <div class="content">
-                    <div class="category">{{article.label}}</div>
-                    
-                    <h2 class="{{figureClass}}">{{ articleTitle }}</h2>
-                    
+                    <div class="category">{{ article.label }}</div>
+
+                    <h2 class="{{ figureClass }}">{{ articleTitle }}</h2>
+
                     <p class="excerpt">{{ quotes.smarten(article.excerpt | raw) }}</p>
-                   
+
                     <div class="author">
-                        <img src="{{profileImg}}" class="img-circle">
+                        <img src="{{ profileImg }}" class="img-circle">
                         <p>{{ article.createdBy['displayName'] }}</p>
                     </div>
 
-                    <time datetime="{{publishDate}}">{{publishDate}}</time>
+                    <time datetime="{{ publishDate }}">{{ publishDate }}</time>
 
                 </div>
             </article>
 
             {% if article.userHasBlogAccess == '1' and swap != '' %}
-            <div class="btn_overlay articleMenu">
-                <button title="Hide" 
-                        data-guid="{{article.guid}}" 
-                        class="btnhide social-tooltip HideBlogArticle" 
-                        type="button" 
-                        data-social="0">
-                    <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
-                </button>
+                <div class="btn_overlay articleMenu">
+                    <button title="Hide"
+                            data-guid="{{ article.guid }}"
+                            class="btnhide social-tooltip HideBlogArticle"
+                            type="button"
+                            data-social="0">
+                        <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
+                    </button>
 
-                <button onclick="window.open('{{article.editUrl}}', '_blank'); return false;" title="Edit" class="btnhide social-tooltip" type="button">
-                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
-                </button>
-                 {% set pinTitle = 'Pin Article' %}
-                 {% set pinTxt = 'Pin' %}
-                 {% set pinClass = '' %}
-                 {% if article.isPinned == 1 %}
-                     {% set pinTitle = 'Un-Pin Article' %}
-                     {% set pinTxt = 'Un-Pin' %}
-                     {% set pinClass = 'selected' %}
-                 {% endif %} 
-                    
-                <button data-position="{{position}}" 
-                        data-social="0" 
-                        data-id="{{article.articleId}}" 
-                        title="{{pinTitle}}" 
-                        class="btnhide social-tooltip PinArticleBtn {{pinClass}}" 
-                        type="button" 
-                        data-status="{{article.isPinned}}">
-                    <i class="fa fa-thumb-tack"></i><span class="hide">{{pinTxt}}</span>
-                </button>
-            </div>
+                    <button onclick="window.open('{{ article.editUrl }}', '_blank'); return false;" title="Edit"
+                            class="btnhide social-tooltip" type="button">
+                        <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                    </button>
+                    {% set pinTitle = 'Pin Article' %}
+                    {% set pinTxt = 'Pin' %}
+                    {% set pinClass = '' %}
+                    {% if article.isPinned == 1 %}
+                        {% set pinTitle = 'Un-Pin Article' %}
+                        {% set pinTxt = 'Un-Pin' %}
+                        {% set pinClass = 'selected' %}
+                    {% endif %}
+
+                    <button data-position="{{ position }}"
+                            data-social="0"
+                            data-id="{{ article.articleId }}"
+                            title="{{ pinTitle }}"
+                            class="btnhide social-tooltip PinArticleBtn {{ pinClass }}"
+                            type="button"
+                            data-status="{{ article.isPinned }}">
+                        <i class="fa fa-thumb-tack"></i><span class="hide">{{ pinTxt }}</span>
+                    </button>
+                </div>
             {% endif %}
         </a>
     </div><!--swiper slide-->
@@ -124,75 +125,85 @@
     {% set videoClass = (social.media['type'] == 'video') ? 'video' : '' %}
     {% set hasArticleMediaClass = (social.hasMedia == 'TRUE') ? 'withImage__content': 'without__image' %}
     {% set hasArticleContentClass = (social.content) ? '': 'without__content' %}
+    {% set publishDate = _AppHelper.getDateTimeBasedOnTimezone(social.publishDate, 'm F Y') %}
 
-    <div class="{{containerClass}}">
-        <a  href="{{social.url}}"
-            target="_blank"
-            class="{{swap}} card social {{ social.source }} {{hasArticleContentClass}} {{hasArticleMediaClass}}" 
-            data-id="{{article.socialId}}" 
-            data-position="{{position}}"
-            data-blog-guid="{{social.blog['guid']}}" 
-            data-guid="{{social.guid}}" 
-            data-social="1" 
-            data-article-image="{{social.media['path']}}" 
-            data-article-text="{{Helper.htmlToText(social.content, -1) | raw | escape('html')}}">
+    <div class="{{ containerClass }}">
+        <a href="{{ social.url }}"
+           target="_blank"
+           class="{{ swap }} card social {{ social.source }} {{ hasArticleContentClass }} {{ hasArticleMediaClass }}"
+           data-id="{{ article.socialId }}"
+           data-position="{{ position }}"
+           data-blog-guid="{{ social.blog['guid'] }}"
+           data-guid="{{ social.guid }}"
+           data-social="1"
+           data-article-image="{{ social.media['path'] }}"
+           data-article-text="{{ Helper.htmlToText(social.content, -1) | raw | escape('html') }}">
 
             <article class="socialarticle {{ social.source }}">
-                {% if social.hasMedia == 'TRUE' and imageSuppress == 'false' %}  
-                    <figure class="{{videoClass}}">
+                {% if social.hasMedia == 'TRUE' and imageSuppress == 'false' %}
+                    <figure class="{{ videoClass }}">
+                        <picture>
+                            {% if lazyload == false %}
+                                <img class="img-responsive" data-object-fit="{{ dataObjectFit }}"
+                                     src="{{ social.media['path'] }}" {% if articleImg is not empty %} style="background-image:url('{{ placeholder }}');" {% endif %}>
+                            {% else %}
+                                <img class="img-responsive lazyload" data-object-fit="{{ dataObjectFit }}"
+                                     data-original="{{ social.media['path'] }}" {% if articleImg is not empty %} style="background-image:url('{{ placeholder }}');" {% endif %}>
+                            {% endif %}
 
-                        {% if lazyload == false %}
-                            <img class="img-responsive" src="{{social.media['path']}}"  {% if articleImg is not empty %} style="background-image:url('{{placeholder}}');" {%endif%}>
-                        {% else %}
-                            <img class="img-responsive lazyload" data-original="{{social.media['path']}}"  {% if articleImg is not empty %} style="background-image:url('{{placeholder}}');" {%endif%}>
-                        {%endif%}
 
-
-                        {# <div class="image-wrapper lazyload" data-original="{{social.media['path']}}" {% if social.media['path'] is not empty %} style="background-image:url('{{placeholder}}');"{%endif%}></div> #}
-                        {% if social.media['type'] == 'video' and social.media['videoUrl'] is not empty %}
-                            <div class="play_icon video-player" data-source="{{social.source}}" data-url="{{social.media['videoUrl']}}" data-poster="{{social.media['path']}}"></div>
-                        {% endif %}
+                            {# <div class="image-wrapper lazyload" data-original="{{social.media['path']}}" {% if social.media['path'] is not empty %} style="background-image:url('{{placeholder}}');"{%endif%}></div> #}
+                            {% if social.media['type'] == 'video' and social.media['videoUrl'] is not empty %}
+                                <div class="play_icon video-player" data-source="{{ social.source }}"
+                                     data-url="{{ social.media['videoUrl'] }}"
+                                     data-poster="{{ social.media['path'] }}"></div>
+                            {% endif %}
+                        </picture>
                     </figure>
                 {% endif %}
 
 
                 <div class="content">
-                    <div class="category {{social.source}}">{{social.source}}</div>
-                    
-                    <p id="updateSocial{{article.socialId}}" data-update="0">
-                             {{ quotes.smarten(social.content  | raw) }}
+                    <div class="category {{ social.source }}">{{ social.source }}</div>
+
+                    <p id="updateSocial{{ article.socialId }}" data-update="0">
+                        {{ quotes.smarten(social.content  | raw) }}
                     </p>
 
-                    <time datetime="2016-11-16">{{_AppHelper.getDateTimeBasedOnTimezone(social.publishDate, 'F, Y')}}</time>
-                    
+                    <time datetime="{{ publishDate }}">{{ publishDate }}</time>
+
                     <div class="author">
-                        <img src="{{social.user.media.path}}" class="img-circle">
-                        <p class="">{{ (social.source == _Article.socialArticleSourceTwitter()) ? '@' : ''}}{{ social.user['name'] | lower }}</p>
+                        <img src="{{ social.user.media.path }}" class="img-circle">
+                        <p class="">{{ (social.source == _Article.socialArticleSourceTwitter()) ? '@' : '' }}{{ social.user['name'] | lower }}</p>
                     </div><!-- .author-->
 
                 </div>
             </article>
 
             {% if article.userHasBlogAccess == '1' and swap != '' %}
-            <div class="btn_overlay articleMenu">
-                <button title="Hide" data-guid="{{social.guid}}" class="btnhide social-tooltip HideBlogArticle" type="button" data-social="1">
-                    <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
-                </button>
-                    <button title="Edit" class="btnhide social-tooltip editSocialPost" type="button" data-url="/admin/social-funnel/update-social?guid={{social.blog['guid']}}&socialguid={{social.guid}}">
-                    <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                <div class="btn_overlay articleMenu">
+                    <button title="Hide" data-guid="{{ social.guid }}" class="btnhide social-tooltip HideBlogArticle"
+                            type="button" data-social="1">
+                        <i class="fa fa-eye-slash"></i><span class="hide">Hide</span>
                     </button>
-                 {% set pinTitle = 'Pin Article' %}
-                 {% set pinTxt = 'Pin' %}
-                 {% set pinClass = '' %}
-                 {% if article.isPinned == 1 %}
-                     {% set pinTitle = 'Un-Pin Article' %}
-                     {% set pinTxt = 'Un-Pin' %}
-                     {% set pinClass = 'selected' %}
-                 {% endif %}    
-                <button data-position="{{position}}" data-social="1" data-id="{{article.socialId}}" title="{{pinTitle}}" class="btnhide social-tooltip PinArticleBtn {{pinClass}}" type="button" data-status="{{article.isPinned}}">
-                    <i class="fa fa-thumb-tack"></i><span class="hide">{{pinTxt}}</span>
-                </button>
-            </div>
+                    <button title="Edit" class="btnhide social-tooltip editSocialPost" type="button"
+                            data-url="/admin/social-funnel/update-social?guid={{ social.blog['guid'] }}&socialguid={{ social.guid }}">
+                        <i class="fa fa-edit"></i><span class="hide">Edit</span>
+                    </button>
+                    {% set pinTitle = 'Pin Article' %}
+                    {% set pinTxt = 'Pin' %}
+                    {% set pinClass = '' %}
+                    {% if article.isPinned == 1 %}
+                        {% set pinTitle = 'Un-Pin Article' %}
+                        {% set pinTxt = 'Un-Pin' %}
+                        {% set pinClass = 'selected' %}
+                    {% endif %}
+                    <button data-position="{{ position }}" data-social="1" data-id="{{ article.socialId }}"
+                            title="{{ pinTitle }}" class="btnhide social-tooltip PinArticleBtn {{ pinClass }}"
+                            type="button" data-status="{{ article.isPinned }}">
+                        <i class="fa fa-thumb-tack"></i><span class="hide">{{ pinTxt }}</span>
+                    </button>
+                </div>
             {% endif %}
         </a>
     </div><!--swiper slide-->

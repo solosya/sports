@@ -49,3 +49,16 @@
         margin: -($logoSize/2) auto 0;
     }
 }
+
+.hasHero {
+    .site-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+    }
+    .header-bottom {
+        background-color: transparent;
+    }
+}

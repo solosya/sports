@@ -1,0 +1,165 @@
+.site-footer {
+    $logoSize: 94px;
+    background-color: rgb(24, 51, 66);
+    padding-bottom: 25px;
+
+
+    .footerText {
+        opacity: 0.7;
+        font-family: $font-family-primary;
+        font-size: 15px;
+        line-height: 1.73;
+        color: rgb(255,255,255);
+    }
+
+    .footer-brand-top, .footer-brand-bottom {
+        > div > div {
+            margin-left: $logoSize + 5px;
+        }
+
+        h1 {
+            font-size: rem(24px);
+            letter-spacing: 1.3px;
+            color: rgb(183, 149, 110);
+            padding-top: 35px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-family: $font-family-secondary;
+            font-size: rem(16px);
+            letter-spacing: 1.2px;
+            color: rgb(255,255,255);
+            font-weight: 400;
+            padding-top: 18px;
+        }
+    }
+
+    .footer-brand-top {
+        background-color: rgb(255, 255, 255);
+        height: 75px;
+    }
+
+    .footer-brand-bottom {
+        height: 75px;
+        margin-bottom: 35px;
+    }
+
+    .footer-brand {
+
+        position: absolute;
+        top: -($logoSize/2);
+        left: -($logoSize) - 5;
+
+        background-color: rgb(255, 255, 255);
+        display: block;
+        width: $logoSize;
+        height: $logoSize;
+        background-size: contain;
+        border-radius: 50%;
+    }
+
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            flex: 0 0 auto;
+            position: relative;
+            display: inline-block;
+            padding: 0 0 0 15px;
+
+            a {
+                opacity: 0.7;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            flex: 0 0 auto;
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            &:last-child {
+                &:after {
+                    content: "";
+                    padding: 0;
+                }
+            }
+            &:after {
+                content: "|";
+                color: rgb(178, 178, 178);
+                padding: 0 5px;
+
+
+            }
+
+        }
+        a {
+            font-family: $font-family-primary;
+            font-size: 15px;
+            line-height: 1.73;
+            color: rgb(178, 178, 178);
+        }
+    }
+
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            flex:0 0 auto;
+            position: relative;
+            display: inline-block;
+            padding: 0 23px;
+
+            &:first-child {
+                &:before {
+                    border-top: 0;
+                }
+            }
+
+            &:before, &:after {
+                position: absolute;
+                top: 11px;
+                content: "";
+                display: inline-block;
+                width: 15px;
+                border-top: 0.5px solid rgb(255, 255, 255);
+            }
+
+            &:after {
+                right: 0;
+            }
+
+            &:before {
+                left: 0;
+            }
+        }
+
+        a {
+            color: rgb(183, 149, 110);
+            text-transform: uppercase;
+        }
+    }
+}
