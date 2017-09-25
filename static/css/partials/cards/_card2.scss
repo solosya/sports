@@ -68,7 +68,15 @@
         }
 
         time {
-            display: none;
+            display: block;
+            position: absolute;
+            top: 23px;
+            left: -17%;
+            font-size: rem(10px);
+            font-weight: 500;
+            line-height: 1.5;
+            width: 23%;
+            text-align: left;
         }
     }
 
@@ -94,6 +102,12 @@
             }
         }
 
+        &.instagram {
+            time {
+                left: -109%;
+            }
+        }
+
         &.youtube, &.vimeo, &.facebook {
             .content {
                 text-align: left;
@@ -102,6 +116,10 @@
             .category:after {
                 margin-left: 0;
                 margin-right: 0;
+            }
+
+            time {
+                left: -109%;
             }
         }
 
@@ -178,7 +196,13 @@
 
     a.instagram.without__content {
         .content {
-            display: none;
+            h2, p, .category  {
+                display: none;
+            }
+
+            time {
+                left: 21%;
+            }
         }
 
         figure {

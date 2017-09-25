@@ -1,6 +1,6 @@
 .site-header {
     text-align: center;
-
+    z-index: 11;
     @media (max-width: $sm-break) {
         max-height: 95px;
     }

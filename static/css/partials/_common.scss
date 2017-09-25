@@ -30,6 +30,7 @@ body {
 
 .container-fluid {
     max-width: $fluid-container-width;
+    z-index: 10;
 }
 
 .container-full {

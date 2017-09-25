@@ -67,7 +67,15 @@
         }
 
         time {
-            display: none;
+            display: block;
+            position: absolute;
+            top: -211px;
+            left: -28%;
+            font-size: rem(10px);
+            font-weight: 500;
+            line-height: 1.5;
+            width: 23%;
+            text-align: left;
         }
     }
 

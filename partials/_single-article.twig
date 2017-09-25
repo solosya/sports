@@ -33,6 +33,12 @@
     {% set publishDate = _AppHelper.getDateTimeBasedOnTimezone(article.publishDate, 'm F Y') %}
     {# {% set publishDate = _AppHelper.getDefaultTimezoneDateTime(article.publishDate) %} #}
 
+    {% set publishedAgo = _AppHelper.getSecondsSincePublished(article.publishDateTime) %}
+    {% if publishedAgo < 86400 %}
+        {% set publishDate = _AppHelper.getRelativeTime(article.publishDateTime) ~ " ago" %}
+    {% endif %}
+
+
     {% set profileImg = _Media.getMediaUrl(article.createdBy['media'], 34, 34, {radius: 'max', gravity: 'face', 'crop': 'thumb', type: 'user'}) %}
 
     {% set articleTitle =  quotes.smarten(titleTruncateLength is defined ? article.title | truncate(titleTruncateLength) : article.title) %}

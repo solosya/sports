@@ -2462,7 +2462,8 @@ body {
   font-family: "Poppins", Helvetica, Arial, sans-serif; }
 
 .container-fluid {
-  max-width: 1355px; }
+  max-width: 1355px;
+  z-index: 10; }
 
 .container-full {
   margin-right: auto;
@@ -3106,7 +3107,8 @@ span.leadsentence {
         max-height: 0; } }
 
 .site-header {
-  text-align: center; }
+  text-align: center;
+  z-index: 11; }
   @media (max-width: 768px) {
     .site-header {
       max-height: 95px; } }
@@ -4332,7 +4334,15 @@ body[class*="_overview"] div.main-content ul.section-list {
         line-height: 1.25;
         padding-top: 16px; }
       .card2-desktop .content time {
-        display: none; }
+        display: block;
+        position: absolute;
+        top: 23px;
+        left: -17%;
+        font-size: 0.625rem;
+        font-weight: 500;
+        line-height: 1.5;
+        width: 23%;
+        text-align: left; }
     .card2-desktop a.social p {
       font-size: 1rem;
       font-weight: 500;
@@ -4346,11 +4356,15 @@ body[class*="_overview"] div.main-content ul.section-list {
       bottom: 0;
       background: #b2b2b2;
       opacity: 0.2; }
+    .card2-desktop a.withImage__content.instagram time {
+      left: -109%; }
     .card2-desktop a.withImage__content.youtube .content, .card2-desktop a.withImage__content.vimeo .content, .card2-desktop a.withImage__content.facebook .content {
       text-align: left; }
     .card2-desktop a.withImage__content.youtube .category:after, .card2-desktop a.withImage__content.vimeo .category:after, .card2-desktop a.withImage__content.facebook .category:after {
       margin-left: 0;
       margin-right: 0; }
+    .card2-desktop a.withImage__content.youtube time, .card2-desktop a.withImage__content.vimeo time, .card2-desktop a.withImage__content.facebook time {
+      left: -109%; }
     .card2-desktop a.withImage__content.twitter .content p, .card2-desktop a.withImage__content.instagram .content p {
       font-size: 0.75rem;
       line-height: 1.5;
@@ -4392,8 +4406,10 @@ body[class*="_overview"] div.main-content ul.section-list {
       font-size: 0.75rem;
       font-weight: 400;
       line-height: 1.25; }
-    .card2-desktop a.instagram.without__content .content {
+    .card2-desktop a.instagram.without__content .content h2, .card2-desktop a.instagram.without__content .content p, .card2-desktop a.instagram.without__content .content .category {
       display: none; }
+    .card2-desktop a.instagram.without__content .content time {
+      left: 21%; }
     .card2-desktop a.instagram.without__content figure {
       position: absolute;
       top: 0;
@@ -4511,7 +4527,15 @@ body[class*="_overview"] div.main-content ul.section-list {
         line-height: 1.25;
         padding-top: 16px; }
       .card3-desktop .content time {
-        display: none; }
+        display: block;
+        position: absolute;
+        top: -211px;
+        left: -28%;
+        font-size: 0.625rem;
+        font-weight: 500;
+        line-height: 1.5;
+        width: 23%;
+        text-align: left; }
     .card3-desktop a.social p {
       font-size: 1.125rem;
       font-weight: 600;
@@ -4662,7 +4686,11 @@ body[class*="_overview"] div.main-content ul.section-list {
         line-height: 1.25;
         padding-top: 16px; }
       .card5-desktop .content time {
-        display: none; }
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1.25;
+        color: #6e6e6e; }
     .card5-desktop a.social p {
       font-size: 1.75rem;
       font-weight: 600;
@@ -4824,10 +4852,10 @@ body[class*="_overview"] div.main-content ul.section-list {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    float: left;
-    max-height: 285px; }
+    float: left; }
     @media (max-width: 768px) {
       .hero-banner-blog figure {
+        max-height: 285px;
         float: none; } }
     .hero-banner-blog figure picture, .hero-banner-blog figure img {
       width: 100%;

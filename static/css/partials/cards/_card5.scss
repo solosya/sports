@@ -67,7 +67,11 @@
         }
 
         time {
-            display: none;
+            display: block;
+            font-size: rem(12px);
+            font-weight: 500;
+            line-height: 1.25;
+            color: rgb(110, 110, 110);
         }
     }
 
