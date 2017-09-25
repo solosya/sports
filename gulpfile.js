@@ -17,7 +17,7 @@ gulp.task('styles', function (callback) {
 });
 
 gulp.task('scripts', function (callback) {
-    runSequence('vendor_scripts', 'user_scripts', 'uglify-js', 'cache', callback);
+    runSequence('vendor_scripts', 'user_scripts', 'uglify-js', 'cacheJS', callback);
 });
 
 gulp.task('cache', function () {
@@ -25,6 +25,19 @@ gulp.task('cache', function () {
     return gulp.src('layouts/main.twig')
         .pipe(buster({
             tokenRegExp: /\/((.*?)\.min\.css)\?v=[0-9a-z]+/g,
+            assetRoot: __dirname,
+            hashes: hasher.hashes,
+            env: 'production'
+        }))
+        .pipe(gulp.dest('layouts/'));
+});
+
+gulp.task('cacheJS', function () {
+    var debug = true;
+    console.log(hasher.hashes);
+    return gulp.src('layouts/partials/_javascript.twig')
+        .pipe(buster({
+            tokenRegExp: /\/((.*?)\.min\.js)\?v=[0-9a-z]+/g,
             assetRoot: __dirname,
             hashes: hasher.hashes,
             env: 'production'
