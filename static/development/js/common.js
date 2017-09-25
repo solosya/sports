@@ -13,9 +13,7 @@
             $('.site-header').toggleClass('activeNav');
         });
 
-        console.log('123');
         $(".hero-banner-blog .description").dotdotdot();
-        console.log('321');
 
     });
 

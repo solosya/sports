@@ -1,62 +1,54 @@
-{% if _AppHelper.getApplicationEnv() == 'PROD'%}
+{% if _AppHelper.getApplicationEnv() == 'PROD' %}
     {# http://d31nhj1t453igc.cloudfront.net/sdk/sdk-v1.0.0.min.js #}
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/deploy/scripts.js?ver=1"></script>
-
-
+    <script type="text/javascript" src="{{ networkData.templatePath }}/static/deploy/vendor.min.js"></script>
+    <script type="text/javascript" src="{{ networkData.templatePath }}/static/deploy/main.min.js"></script>
 {% else %}
-
-    <script type="text/javascript" src="{{networkData.templatePath}}/bower_components/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/bower_components/swiper/dist/js/swiper.jquery.js"></script>
-    
-
-
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/slick.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/bootstrap-modalmanager.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/bootstrap-modal.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.noty-2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.fancybox/source/jquery.fancybox.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/bootbox.js?ver=2"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.validate/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/waypoint/lib/jquery.waypoints.min.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/handlebars-v4.0.5.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.lazyload.min.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.dotdotdot.min.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/owl.carousel.min.js"></script>
-
-
-
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/cloudinary/jquery.cloudinary.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/common.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/blog.js?ver=4"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/article.js?ver=1"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/search.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/video-player.js?ver=3"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/user-articles.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/follow.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/login.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/image.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/social-share.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/yii/yii.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/yii/yii.captcha.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/uploadfile.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/media-player/mediaelement-and-player.min.js"></script>
-
-
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/_article-templates.js?ver=2"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/common.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/card.js?ver=10"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/search.js?ver=1"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/user-articles.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/auth.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/user-profile.js"></script>
-    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/scripts.js?ver=26"></script>
-
-
-
-    <!-------------------------->
-    <!--- IMPORTANT: remember to add to gruntfile.js, if making any changes ---->
-    <!-------------------------->
-
+    <script type="text/javascript" src="{{ networkData.templatePath }}/static/deploy/vendor.js"></script>
+    <script type="text/javascript" src="{{ networkData.templatePath }}/static/deploy/main.js"></script>
 {% endif %}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/bower_components/jquery/dist/jquery.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/bower_components/swiper/dist/js/swiper.jquery.js"></script>#}
+
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/slick.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/bootstrap-modalmanager.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/bootstrap-modal.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.noty-2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.fancybox/source/jquery.fancybox.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/bootbox.js?ver=2"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.validate/jquery.validate.min.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/waypoint/lib/jquery.waypoints.min.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/handlebars-v4.0.5.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.lazyload.min.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/jquery.dotdotdot.min.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/plugins/owl.carousel.min.js"></script>#}
+
+
+
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/cloudinary/jquery.cloudinary.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/common.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/blog.js?ver=4"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/article.js?ver=1"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/search.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/video-player.js?ver=3"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/user-articles.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/follow.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/login.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/image.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/social-share.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/yii/yii.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/yii/yii.captcha.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/uploadfile.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/sdk/media-player/mediaelement-and-player.min.js"></script>#}
+
+
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/_article-templates.js?ver=2"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/common.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/card.js?ver=10"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/search.js?ver=1"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/user-articles.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/auth.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/user-profile.js"></script>#}
+    {#<script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/scripts.js?ver=26"></script>#}
+
