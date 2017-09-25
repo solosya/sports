@@ -6,33 +6,36 @@
 {{ set(this, 'title', article.title) }}
 {% set networkData = _Network.getNetworkData() %}
 
+{% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
+{% set articles = articlesArr.articles %}
+{% set articleCount = 1 %}
 
 {% set currentPage = {
-    "title": this.title,
-    "link": article.url
+"title": this.title,
+"link": article.url
 } %}
 
 
 {% set parentUrl = article.blog.url | split('@')[1] | replace({'-videos': '', '-notes': ''}) %}
 {% set parentBlog = {
-    "title": "",
-    "link": ""
+"title": "",
+"link": ""
 } %}
 
 {% set parentPage = {
-    "title": "",
-    "link": ""
+"title": "",
+"link": ""
 } %}
 
 {% set sectionMap = blogInfo.blogHeaderMenu %}
 
-{% set publishedDate = _AppHelper.getDateTimeBasedOnTimezone(article.publishedDate, 'F Y') %}
+{% set publishedDate = _AppHelper.getDateTimeBasedOnTimezone(article.publishedDate, 'j M Y') %}
 
-{% for key, value in sectionMap  %}
+{% for key, value in sectionMap %}
 
 
     {% if value['children'] | length > 0 %}
-        {% for key, childvalue in value['children']  %}
+        {% for key, childvalue in value['children'] %}
 
             {% if childvalue.link | split('@')[1] == parentUrl %}
                 {% set parentBlog = parentBlog|merge({('title'): childvalue.blogTitle}) %}
@@ -48,44 +51,71 @@
     {% endif %}
 {% endfor %}
 
+{% set placeholder = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=Loading&w='~imgWidth~'&h='~imgHeight~'' %}
+{% set articleImg = _Media.getMediaUrl(article.media[0], imgWidth, imgHeight, {'crop': 'fill', 'gravity': 'faces'} ) %}
+{% set articleImg = "https://res.cloudinary.com/cognitives/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_faces,q_auto/z5gkr2h62ttqafdwcmnq" %}
 
 <main id="main" class="" role="main">
+    {% if articleImg is not empty %}
+        <div class="hero-banner">
+            <div class="hero-banner-article card1-desktop card1-mobile">
+                <figure class="{{ figureClass }}">
+                    <picture>
+                        <img class="img-responsive" data-object-fit="{{ dataObjectFit }}" src="{{ articleImg }}"
+                             data-original="{{ articleImg }}" {% if articleImg is not empty %} style="background-image:url('{{ placeholder }}');" {% endif %}>
+                    </picture>
+                </figure>
+                <div class="content">
+                    <h1>{{ quotes.smarten(article.title) }}</h1>
+                    <p>{{ social.source }}{{ article.label }}<span class="spacer">|</span><time datetime="{{ publishedDate }}">{{ publishedDate }}</time></p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
+    {#    <div class="container" >
+                {{this.render('partials/breadcrumb.twig', {
+                    blogInfo: blogInfo,
+                    blogImage:blogImage,
+                    networkData: networkData,
+                    crumb: [parentPage, parentBlog, currentPage],
 
-    <div class="container" >
-            {{this.render('partials/breadcrumb.twig', {
-                blogInfo: blogInfo, 
-                blogImage:blogImage,
-                networkData: networkData,
-                crumb: [parentPage, parentBlog, currentPage],
-
-            }) | raw}}
-    </div>
-
+                }) | raw}}
+        </div>#}
     <article class="article-main">
-
-        <div class="container">
+        <div class="container-fluid">
             <div class="page-content">
                 <div class="row">
-                    <div class="col-md-offset-2 col-md-8">
+                    <div class="col-sm-10 col-sm-push-1">
                         <div class="content-wrapper">
-                            <div class="content-block-top">
-
-                                <h1>{{ quotes.smarten(article.title) }}</h1>
-                                <h2>{{parentBlog.title}} - <time datetime="{{publishedDate}}">{{publishedDate}}</time></h2> 
-
-                            </div><!--content-block-top-->
-
                             <div class="article_content">
                                 <p>{{ article.content | _resizeImages({'width': 500}) | raw }}</p>
-                            </div><!-- .content-->
-                        </div><!-- .content-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2 class="artcle__related-title"><span>Related Articles</span></h2>
+                            </div>
+                            {% if articles[articleCount] %}
+                                {% for i in 0..2 if articles[i] %}
+                                    <div class="col-sm-4">
+                                        {{ this.render('partials/_single-article.twig', {
+                                            article: articles[3],
+                                            position: articleCount + 1,
+                                            containerClass: 'card4-desktop card4-mobile'
+                                        }) | raw }}
+                                        {% set articleCount = (dev) ? articleCount : articleCount + 1 %}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
 
-                    </div><!-- .col-md-8-->
+                        </div>
+                    </div>
                 </div>
-            </div><!-- .page-content-->
-
-        </div><!--container-->
+            </div>
+        </div>
     </article>
-</main><!--site-main-->
+</main>
 

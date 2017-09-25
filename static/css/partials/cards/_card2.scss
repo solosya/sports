@@ -1,5 +1,5 @@
-.card2 {
-    @include cardHeight(200px);
+@mixin card2($cardHeight) {
+    @include cardHeight($cardHeight);
     background: rgb(255, 255, 255);
     overflow: hidden;
 
@@ -268,19 +268,18 @@
 
 .card2 {
     &-desktop {
-        @extend .card2 !optional;
         @media (min-width: $sm-break) {
+            @include card2(200px);
         }
     }
 
     &-tablet {
-        @extend .card2 !optional;
     }
 
     &-mobile {
-        @extend .card2 !optional;
-        @media (max-width: $sm-break) {
-
-        }
+        @extend .card4-mobile;
+        //@media (max-width: $sm-break) {
+        //    @include card4(341px);
+        //}
     }
 }

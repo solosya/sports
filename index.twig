@@ -3,7 +3,7 @@
 
 {{ this.registerJs("CardController();") }}
 
-{% set debugAllACards = true %}
+{% set debugAllACards = false %}
 {% set debugArray = 0..13 %}
 {% set limit = 30 %}
 
@@ -44,7 +44,7 @@
         {% endfor %}
 
         <div class="container-fluid">
-            <div class="col-xs-8">
+            <div class="col-xs-12 col-sm-8">
                 {% for t in 2..3 %}
                     <h1>Debug Card: {{ t }}</h1>
                     <div class="row">
@@ -59,7 +59,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="col-xs-4">
+            <div class="col-sm-4">
                 <div class="col-sidebar">
                     {% for t in 4..4 %}
                         <h1>Debug Card: {{ t }}</h1>
@@ -97,21 +97,34 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-xs-12 col-sm-8">
+                <div class="infoBar">
+                    <ul class="menu">
+                        <li><a href="#">All</a></li>
+                        <li><a href="#">Articles</a></li>
+                        <li><a href="#">Photos</a></li>
+                        <li><a href="#">Videos</a></li>
+                        <li><a href="#">Social</a></li>
+
+                    </ul>
+                </div>
+                <div class="infoBar">
+                    <p>Dayofweek, 01 August</p>
+                </div>
                 {% if articles[articleCount] %}
                     {% set articleView = [
-                    'card2-desktop',
-                    'card2-desktop',
-                    'card2-desktop',
-                    'card3-desktop',
-                    'card2-desktop',
-                    'card2-desktop',
-                    'card2-desktop',
-                    'card3-desktop',
-                    'card2-desktop',
-                    'card3-desktop',
-                    'card2-desktop',
-                    'card2-desktop',
+                    'card2-desktop card2-mobile',
+                    'card2-desktop card2-mobile',
+                    'card2-desktop card2-mobile',
+                    'card3-desktop card3-mobile',
+                    'card2-desktop card2-mobile',
+                    'card2-desktop card2-mobile',
+                    'card2-desktop card2-mobile',
+                    'card3-desktop card3-mobile',
+                    'card2-desktop card2-mobile',
+                    'card3-desktop card3-mobile',
+                    'card2-desktop card2-mobile',
+                    'card2-desktop card2-mobile',
                     ] %}
                     {% for key, value in articleView if articles[key] %}
                         {{ this.render('partials/_single-article.twig', {
@@ -124,16 +137,21 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <div class="col-sm-4">
+            <div class="col-xs-12 col-sm-4">
                 <div class="col-sidebar">
+                    <div class="sponsor">
+                        <figure>
+                        </figure>
+                    </div>
+                    <h2>Most Popular Stories</h2>
                     {% if articles[articleCount] %}
                         {% set articleView = [
-                        'card4-desktop',
-                        'card4-desktop',
-                        'card4-desktop',
-                        'card4-desktop',
-                        'card4-desktop',
-                        'card4-desktop'
+                        'card4-desktop card4-mobile',
+                        'card4-desktop card4-mobile',
+                        'card4-desktop card4-mobile',
+                        'card4-desktop card4-mobile',
+                        'card4-desktop card4-mobile',
+                        'card4-desktop card4-mobile'
                         ] %}
                         {% for key, value in articleView if articles[key] %}
                             {{ this.render('partials/_single-article.twig', {

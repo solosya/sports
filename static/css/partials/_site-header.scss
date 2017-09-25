@@ -1,6 +1,10 @@
 .site-header {
     text-align: center;
 
+    @media (max-width: $sm-break) {
+        max-height: 95px;
+    }
+
     .header-top, .header-bottom {
         @include container-fixed;
         padding-left: 0;
@@ -17,28 +21,53 @@
         padding-top: 33px;
         background-color: rgb(255,255,255);
 
+        @media (max-width: $sm-break) {
+            max-height: 103px;
+            height: 103px;
+        }
+
         h1 {
             font-size: rem(25px);
             letter-spacing: 1.3px;
             text-align: center;
             color: rgb(183, 149, 110);
             text-transform: uppercase;
+
+            @media (max-width: $sm-break) {
+                font-size: rem(18px);
+                letter-spacing: 0.9px;
+            }
         }
 
         p {
             font-size: rem(16px);
             letter-spacing: 1.2px;
             color: rgb(70, 67, 67);
+
+            @media (max-width: $sm-break) {
+                position: absolute;
+                top: 22px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: rem(10px);
+                letter-spacing: 0.7px;
+            }
         }
     }
 
     .header-bottom {
         background-color: rgb(24, 51, 66);
         min-height: 142px;
+
+        @media (max-width: $sm-break) {
+            background-color: transparent;
+        }
     }
 
     .navbar-brand {
         $logoSize: 94px;
+        $smLogoSize: 49px;
 
         background-color: rgb(255, 255, 255);
         display: block;
@@ -47,6 +76,12 @@
         background-size: contain;
         border-radius: 50%;
         margin: -($logoSize/2) auto 0;
+
+        @media (max-width: $sm-break) {
+            width: $smLogoSize;
+            height: $smLogoSize;
+            margin: -($smLogoSize/2) auto 0;
+        }
     }
 }
 

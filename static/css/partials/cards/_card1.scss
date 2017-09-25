@@ -1,5 +1,5 @@
-.card1 {
-    @include cardHeight(800px);
+@mixin card1($cardHeight) {
+    @include cardHeight($cardHeight);
     background: rgb(255, 255, 255);
     overflow: hidden;
 
@@ -42,7 +42,7 @@
             content: "";
             display: block;
             width: 18px;
-            border-top: solid 2px rgb(255,255,255);
+            border-top: solid 2px rgb(255, 255, 255);
             margin: 6px 0 15px;
         }
     }
@@ -52,10 +52,10 @@
         left: 0;
         right: 0;
         bottom: 9.7%;
-        width: $fluid-container-width;
+        max-width: $fluid-container-width;
         margin: 0 auto;
         padding: 0 $grid-gutter-width/2;
-        color: rgb(255,255,255);
+        color: rgb(255, 255, 255);
         text-align: left;
 
         > * {
@@ -218,8 +218,8 @@
 
 .card1 {
     &-desktop {
-        @extend .card1 !optional;
         @media (min-width: $sm-break) {
+            @include card1(800px);
         }
     }
 
@@ -228,9 +228,112 @@
     }
 
     &-mobile {
-        @extend .card1 !optional;
         @media (max-width: $sm-break) {
+            @include card1(310px);
+
+            .category {
+                display: inline-block;
+                font-size: rem(10.5px);
+                font-weight: 600;
+                line-height: 1.43;
+                letter-spacing: 0.4px;
+                text-transform: uppercase;
+            }
+
+            .content {
+                bottom: 12%;
+
+                h2 {
+                    font-size: rem(22px);
+                    font-weight: 500;
+                    line-height: 1.27;
+                    max-height: 3 * (22px * 1.27);
+                }
+
+                .excerpt {
+                    display: none;
+                }
+
+                .author p {
+                    display: none;
+                }
+
+                time {
+                }
+
+                &:before {
+                    display: none;
+                }
+            }
+
+            a.social {
+                p {
+                    font-size: rem(22px);
+                    font-weight: 500;
+                    line-height: 1.27;
+                    max-height: 3 * (22px * 1.27);
+                }
+            }
+
+            // Icons
+            a:after {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 55px;
+                height: 55px;
+            }
 
         }
     }
+}
+
+.hero-banner-article {
+    .content {
+        top: 35%;
+        text-align: center;
+
+        h1 {
+            font-size: rem(142px);
+            font-weight: 600;
+            overflow: hidden;
+            text-wrap: none;
+            max-height: 1 * (142px * 1.1);
+
+            @media (max-width: $sm-break) {
+                font-size: rem(40px);
+                font-weight: 600;
+                max-height: 1 * (40px * 1.1);
+            }
+        }
+
+        time {
+            display: inline;
+        }
+
+        p {
+            font-size: rem(16px);
+            font-weight: 600;
+            line-height: 0.94;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+
+            @media (max-width: $sm-break) {
+                font-size: rem(10.6px);
+                font-weight: 600;
+                line-height: 1.42;
+            }
+
+            .spacer {
+                padding: 0 15px;
+            }
+        }
+
+        > * {
+            max-width: 100%;
+        }
+    }
+
+
 }

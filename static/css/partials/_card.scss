@@ -10,24 +10,29 @@
 }
 
 @import "cards/card1";
+@import "cards/card4"; //Load card4 before card 2/3 as card 2/3 changes to card4 on mobile
 @import "cards/card2";
 @import "cards/card3";
-@import "cards/card4";
 @import "cards/card5";
+@import "cards/blog";
 
 .hero-banner {
     position: relative;
     margin-top: 150px;
-
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 477px;
-        background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgb(24, 51, 66));
-        z-index: 9;
+    @media (max-width: $sm-break) {
+        margin-top: 103px;
+    }
+    @media (min-width: $sm-break) {
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 477px;
+            background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgb(24, 51, 66));
+            z-index: 9;
+        }
     }
 }
 

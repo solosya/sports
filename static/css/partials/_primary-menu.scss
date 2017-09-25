@@ -1,14 +1,46 @@
 .primaryNav {
-    position: relative;
     margin: 43px 0 0 0;
 
+    .navbar-toggler {
+        @media (min-width: $sm-break) {
+            display: none;
+        }
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: block;
+        text-align: center;
+        background: none;
+        border: none;
+        outline: none;
+        font-family: $font-family-primary;
+        font-size: 8.2px;
+        letter-spacing: 0.6px;
+        padding-top: 10px;
+    }
+
     .menu {
+        @extend %transition;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         list-style: none;
         padding: 0;
         margin: 0;
+        z-index: 20;
+
+        @media (max-width: $sm-break) {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            max-height: 30em;
+            height: auto;
+            overflow: hidden;
+        }
 
         li {
             flex:0 0 auto;
@@ -16,10 +48,23 @@
             display: inline-block;
             padding: 0 23px;
 
-            &:first-child, &:last-child {
-                margin-top: 11px;
-                border-top: 1px solid rgb(255,255,255);
-                flex:1 0 auto;
+            @media (min-width: $sm-break) {
+                &:first-child, &:last-child {
+                    margin-top: 11px;
+                    border-top: 1px solid rgb(255, 255, 255);
+                    flex: 1 0 auto;
+                }
+            }
+
+            @media (max-width: $sm-break) {
+                width: 100%;
+                display: block;
+                background: rgb(255,255,255);
+                border-bottom: 1px solid rgba(178, 178, 178, 0.2);
+
+                &.filler {
+                    display: none;
+                }
             }
         }
 
@@ -30,7 +75,13 @@
             color: rgb(183, 149, 110);
             padding: 0;
             margin: 0;
+
+            @media (max-width: $sm-break) {
+                display: block;
+                padding: 15px 0;
+            }
         }
+
         li:not(.filler) {
             &:before, &:after {
                 position: absolute;
@@ -45,6 +96,13 @@
             }
             &:before {
                 left: 0;
+            }
+        }
+
+        @media (max-width: $sm-break) {
+            &:not(.active) {
+                height: 0;
+                max-height: 0;
             }
         }
     }

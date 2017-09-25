@@ -1,5 +1,5 @@
-.card4 {
-    @include cardHeight(353px);
+@mixin card4($cardHeight) {
+    @include cardHeight($cardHeight);
     background: rgb(255, 255, 255);
     overflow: hidden;
 
@@ -79,6 +79,7 @@
         right: 0;
         width: 61px;
         height: 61px;
+        background-size: 100% 100%;
     }
 
     a.withImage__content:after {
@@ -116,19 +117,42 @@
 
 .card4 {
     &-desktop {
-        @extend .card4 !optional;
         @media (min-width: $sm-break) {
+            @include card4(353px);
         }
     }
 
     &-tablet {
-        @extend .card4 !optional;
     }
 
     &-mobile {
-        @extend .card4 !optional;
         @media (max-width: $sm-break) {
+            @include card4(341px);
 
+            .content {
+                //98px
+                padding: 26px 30px 0;
+
+                h2, p {
+                    font-size: rem(16px);
+                    font-weight: 600;
+                    line-height: 1.22;
+                    max-height: 3 * (16px * 1.22);
+                }
+
+                time {
+                    display: none;
+                }
+            }
+
+            a:after, a.instagram.without__content:after {
+                width: 55px;
+                height: 55px;
+            }
+
+            a.withImage__content:after {
+                top: 200px - 55px;
+            }
         }
     }
 }

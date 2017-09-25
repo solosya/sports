@@ -1,5 +1,7 @@
 .site-footer {
     $logoSize: 94px;
+    $smLogoSize: 49px;
+
     background-color: rgb(24, 51, 66);
     padding-bottom: 25px;
 
@@ -10,11 +12,20 @@
         font-size: 15px;
         line-height: 1.73;
         color: rgb(255,255,255);
+
+        @media (max-width: $sm-break) {
+            font-size: rem(11px);
+            letter-spacing: 0.3px;
+            line-height: 2;
+        }
     }
 
     .footer-brand-top, .footer-brand-bottom {
         > div > div {
             margin-left: $logoSize + 5px;
+            @media (max-width: $sm-break) {
+                margin-left: $smLogoSize + 5px;
+            }
         }
 
         h1 {
@@ -23,6 +34,12 @@
             color: rgb(183, 149, 110);
             padding-top: 35px;
             text-transform: uppercase;
+
+            @media (max-width: $sm-break) {
+                padding-top: 15px;
+                font-size: rem(16px);
+                letter-spacing: 0.8px;
+            }
         }
 
         p {
@@ -32,17 +49,30 @@
             color: rgb(255,255,255);
             font-weight: 400;
             padding-top: 18px;
+
+            @media (max-width: $sm-break) {
+                font-size: rem(10px);
+                letter-spacing: 0.7px;
+                padding-top: 11px;
+            }
         }
     }
 
     .footer-brand-top {
         background-color: rgb(255, 255, 255);
         height: 75px;
+        @media (max-width: $sm-break) {
+            height: 40px;
+        }
     }
 
     .footer-brand-bottom {
         height: 75px;
         margin-bottom: 35px;
+        @media (max-width: $sm-break) {
+            height: 40px;
+            margin-bottom: 15px;
+        }
     }
 
     .footer-brand {
@@ -57,6 +87,13 @@
         height: $logoSize;
         background-size: contain;
         border-radius: 50%;
+
+        @media (max-width: $sm-break) {
+            top: -($smLogoSize/2);
+            left: -($smLogoSize) - 5;
+            width: $smLogoSize;
+            height: $smLogoSize;
+        }
     }
 
     .social-links {
@@ -67,11 +104,21 @@
         padding: 0;
         margin: 0;
 
+        @media (max-width: $sm-break) {
+            justify-content: flex-start;
+            margin-top: 50px;
+        }
+
         li {
             flex: 0 0 auto;
             position: relative;
             display: inline-block;
             padding: 0 0 0 15px;
+
+            @media (max-width: $sm-break) {
+                padding-left: 0;
+                padding-right: 15px;
+            }
 
             a {
                 opacity: 0.7;
@@ -90,6 +137,10 @@
         list-style: none;
         padding: 0;
         margin: 0;
+
+        @media (max-width: $sm-break) {
+            justify-content: flex-start;
+        }
 
         li {
             flex: 0 0 auto;
@@ -116,6 +167,12 @@
             font-size: 15px;
             line-height: 1.73;
             color: rgb(178, 178, 178);
+
+            @media (max-width: $sm-break) {
+                font-size: rem(11px);
+                letter-spacing: 0.3px;
+                line-height: 2;
+            }
         }
     }
 
@@ -127,39 +184,55 @@
         padding: 0;
         margin: 0;
 
+        @media (max-width: $sm-break) {
+            justify-content: flex-start;
+        }
+
         li {
             flex:0 0 auto;
             position: relative;
             display: inline-block;
             padding: 0 23px;
+            @media (max-width: $sm-break) {
+                display: block;
+                width: 100%;
+                padding: 7px 0;
+            }
 
-            &:first-child {
-                &:before {
-                    border-top: 0;
+            @media (min-width: $sm-break) {
+                &:first-child {
+                    &:before {
+                        border-top: 0;
+                    }
                 }
-            }
 
-            &:before, &:after {
-                position: absolute;
-                top: 11px;
-                content: "";
-                display: inline-block;
-                width: 15px;
-                border-top: 0.5px solid rgb(255, 255, 255);
-            }
+                &:before, &:after {
+                    position: absolute;
+                    top: 11px;
+                    content: "";
+                    display: inline-block;
+                    width: 15px;
+                    border-top: 0.5px solid rgb(255, 255, 255);
+                }
 
-            &:after {
-                right: 0;
-            }
+                &:after {
+                    right: 0;
+                }
 
-            &:before {
-                left: 0;
+                &:before {
+                    left: 0;
+                }
             }
         }
 
         a {
             color: rgb(183, 149, 110);
             text-transform: uppercase;
+
+            @media (max-width: $sm-break) {
+                font-size: rem(16px);
+                letter-spacing: 0.5px;
+            }
         }
     }
 }

@@ -653,9 +653,14 @@ Card.prototype.events = function()
         }
 
         $('.navbar-toggler').on('click', function() {
-            $('#menu-primary-menu').toggleClass('active');
+            $('#menuPrimaryMenu').toggleClass('active');
             $('.site-header').toggleClass('activeNav');
-        })
+        });
+
+        console.log('123');
+        $(".hero-banner-blog .description").dotdotdot();
+        console.log('321');
+
     });
 
     // $('.video-player').videoPlayer();
